@@ -14,18 +14,28 @@ class NavDrawer extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: <Widget>[
           DrawerHeader(
-            child: Text(
-              'Side menu',
-              style: TextStyle(color: Colors.white, fontSize: 25),
-            ),
-            decoration: BoxDecoration(
-              color: Colors.green,
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Boek',
+                    style: Theme.of(context).textTheme.headline2,
+                  ),
+                  Text(
+                    'Max Mustermann',
+                    style: Theme.of(context).textTheme.subtitle1,
+                  ),
+                ],
+              ),
             ),
           ),
           ListTile(
             leading: Icon(Icons.settings),
             title: Text('Analyze'),
-            onTap: () => {},
+            onTap: () => {
+              Navigator.of(context).pop(),
+            },
           ),
           ListTile(
             leading: Icon(Icons.exit_to_app),

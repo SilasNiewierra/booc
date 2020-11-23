@@ -17,6 +17,7 @@ class _LoginState extends State<Login> {
     return Scaffold(
       body: Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
               child: Text("Please login"),
