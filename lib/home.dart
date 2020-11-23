@@ -1,7 +1,8 @@
-import 'package:boek/book_detail.dart';
 import 'package:boek/data_bloc.dart';
 import 'package:boek/nav_drawer.dart';
 import 'package:flutter/material.dart';
+
+import 'book_detail.dart';
 
 class Home extends StatefulWidget {
   final DataBloc dataBloc;
@@ -13,6 +14,21 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  List readBookDummy = [
+    ['r0', 'book-0.jpeg', 'Die Sonnenschwester', 'Lucinda Riley'],
+    ['r1', 'book-1.jpeg', 'Auf silberner Fährte', 'Cornelia Funke'],
+    ['r2', 'book-2.jpeg', 'Der Ickaborg', 'J. K. Rowling'],
+    ['r3', 'book-3.jpeg', 'A promised land', 'Barack Obama'],
+  ];
+
+  List exploreBookDummy = [
+    ['e0', 'book-burnt.jpeg', 'Burnt Sugar', 'Avni Doshi'],
+    ['e1', 'book-chanel.jpeg', 'Chanel', 'Thomas Hudson'],
+    ['e2', 'book-halsey.jpeg', 'I Would leave my body if I could', 'Halsey'],
+    ['e3', 'book-milk.jpeg', 'Milk and honey', 'Rupi Kaur'],
+    ['e4', 'book-shadow.jpeg', 'The shadow king', 'Maaza Mengiste'],
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -101,14 +117,14 @@ class _HomeState extends State<Home> {
               physics: BouncingScrollPhysics(),
               scrollDirection: Axis.horizontal,
               shrinkWrap: true,
-              itemCount: 4,
+              itemCount: readBookDummy.length,
               separatorBuilder: (BuildContext context, int index) {
                 return SizedBox(
                   width: 10,
                 );
               },
               itemBuilder: (BuildContext context, int index) =>
-                  _buildBookItem(index),
+                  _buildBookItem(readBookDummy[index]),
             ),
           )
         ],
@@ -133,14 +149,14 @@ class _HomeState extends State<Home> {
               physics: BouncingScrollPhysics(),
               scrollDirection: Axis.horizontal,
               shrinkWrap: true,
-              itemCount: 4,
+              itemCount: exploreBookDummy.length,
               separatorBuilder: (BuildContext context, int index) {
                 return SizedBox(
                   width: 10,
                 );
               },
               itemBuilder: (BuildContext context, int index) =>
-                  _buildBookItem(index),
+                  _buildBookItem(exploreBookDummy[index]),
             ),
           )
         ],
@@ -148,55 +164,66 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Widget _buildBookItem(int index) {
+  Widget _buildBookItem(var bookItem) {
     return Container(
       // margin: EdgeInsets.all(5.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            height: 350,
-            width: 210,
-            decoration: BoxDecoration(
-              color: Colors.teal,
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(8.0),
-              child: Image.asset(
-                'assets/images/book-' + index.toString() + '.jpeg',
-                fit: BoxFit.fill,
+      child: GestureDetector(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => BookDetail(item: bookItem)),
+          );
+        },
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              height: 350,
+              width: 250,
+              decoration: BoxDecoration(
+                color: Colors.teal,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(8.0),
+                child: Hero(
+                  tag: bookItem[0],
+                  child: Image.asset(
+                    'assets/images/' + bookItem[1],
+                    fit: BoxFit.fill,
+                  ),
+                ),
               ),
             ),
-          ),
-          Container(
-            width: 210,
-            padding: EdgeInsets.symmetric(horizontal: 10.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Interesting",
-                      style: Theme.of(context).textTheme.headline4,
-                    ),
-                    Text(
-                      "Author $index",
-                      style: Theme.of(context).textTheme.subtitle2,
-                    ),
-                  ],
-                ),
-                Container(
-                  width: 30,
-                  height: 30,
-                  color: Colors.yellow,
-                ),
-              ],
+            Container(
+              width: 250,
+              padding: EdgeInsets.symmetric(horizontal: 10.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        bookItem[2],
+                        style: Theme.of(context).textTheme.headline4,
+                      ),
+                      Text(
+                        bookItem[3],
+                        style: Theme.of(context).textTheme.subtitle2,
+                      ),
+                    ],
+                  ),
+                  Container(
+                    width: 30,
+                    height: 30,
+                    color: Colors.yellow,
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
