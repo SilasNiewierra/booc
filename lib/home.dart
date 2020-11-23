@@ -33,6 +33,10 @@ class _HomeState extends State<Home> {
     ],
     ['e3', 'book-milk.jpeg', 'Milk and honey', 'Rupi Kaur', 'Novel'],
     ['e4', 'book-shadow.jpeg', 'The shadow king', 'Maaza Mengiste', 'Novel'],
+    ['e5', 'book-0.jpeg', 'Die Sonnenschwester', 'Lucinda Riley', 'Novel'],
+    ['e6', 'book-1.jpeg', 'Auf silberner Fährte', 'Cornelia Funke', 'Fantasy'],
+    ['e7', 'book-2.jpeg', 'Der Ickaborg', 'J. K. Rowling', 'Fantasy'],
+    ['e8', 'book-3.jpeg', 'A promised land', 'Barack Obama', 'Biography'],
   ];
 
   @override
@@ -43,9 +47,8 @@ class _HomeState extends State<Home> {
       ),
       body: Container(
         padding: EdgeInsets.all(20.0),
-        child: ListView(
-          shrinkWrap: true,
-          // crossAxisAlignment: CrossAxisAlignment.start,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
               margin: EdgeInsets.symmetric(vertical: 20.0),
@@ -79,26 +82,33 @@ class _HomeState extends State<Home> {
                 ],
               ),
             ),
-            _buildRecentBooks(),
-            _buildExploreBooks(),
-            // RaisedButton(
-            //     child: Text("Route Placeholder"),
-            //     onPressed: () {
-            //       Navigator.push(
-            //         context,
-            //         MaterialPageRoute(builder: (context) => BookDetail()),
-            //       );
-            //     }),
+            _buildReadBooks(),
+            // _buildRecentBooks(),
+            // _buildExploreBooks(),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // Add your onPressed code here!
+          // Add new book to read list
         },
-        // label: Text('I read a new book'),
         child: Icon(Icons.add),
         backgroundColor: Theme.of(context).accentColor,
+      ),
+    );
+  }
+
+  Widget _buildReadBooks() {
+    return Flexible(
+      child: GridView.count(
+        crossAxisCount: 2,
+        childAspectRatio: (250 / 350),
+        crossAxisSpacing: 5,
+        mainAxisSpacing: 5,
+        children: List.generate(
+          exploreBookDummy.length,
+          (index) => _buildCoverBookItem(exploreBookDummy[index]),
+        ),
       ),
     );
   }
@@ -146,20 +156,22 @@ class _HomeState extends State<Home> {
             style: Theme.of(context).textTheme.headline3,
           ),
           Container(
-            height: 400.0,
+            // height: 400.0,
             margin: EdgeInsets.symmetric(vertical: 10.0),
-            child: ListView.separated(
-              physics: BouncingScrollPhysics(),
-              scrollDirection: Axis.vertical,
-              shrinkWrap: true,
-              itemCount: exploreBookDummy.length,
-              separatorBuilder: (BuildContext context, int index) {
-                return SizedBox(
-                  height: 10,
-                );
-              },
-              itemBuilder: (BuildContext context, int index) =>
-                  _buildBookItem(exploreBookDummy[index]),
+            child: Expanded(
+              child: ListView.separated(
+                physics: BouncingScrollPhysics(),
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
+                itemCount: exploreBookDummy.length,
+                separatorBuilder: (BuildContext context, int index) {
+                  return SizedBox(
+                    height: 10,
+                  );
+                },
+                itemBuilder: (BuildContext context, int index) =>
+                    _buildBookItem(exploreBookDummy[index]),
+              ),
             ),
           )
         ],
@@ -168,36 +180,35 @@ class _HomeState extends State<Home> {
   }
 
   Widget _buildCoverBookItem(var bookItem) {
-    return Container(
-      child: GestureDetector(
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => BookDetail(item: bookItem)),
-          );
-        },
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              height: 250,
-              width: 170,
-              decoration: BoxDecoration(
-                color: Colors.teal,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(8.0),
-                child: Hero(
-                  tag: bookItem[0],
-                  child: Image.asset(
-                    'assets/images/' + bookItem[1],
-                    fit: BoxFit.fill,
-                  ),
+    return Center(
+      child: Container(
+        height: 350,
+        width: 250,
+        child: GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => BookDetail(item: bookItem)),
+            );
+          },
+          child: Container(
+            width: 200,
+            decoration: BoxDecoration(
+              color: Colors.teal,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(8.0),
+              child: Hero(
+                tag: bookItem[0],
+                child: Image.asset(
+                  'assets/images/' + bookItem[1],
+                  fit: BoxFit.fill,
                 ),
               ),
             ),
-          ],
+          ),
         ),
       ),
     );
