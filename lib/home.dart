@@ -47,13 +47,10 @@ class _HomeState extends State<Home> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Container(
+                  Image.asset(
+                    'assets/images/user-icon.png',
                     width: 50,
                     height: 50,
-                    decoration: BoxDecoration(
-                      color: Colors.teal,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
                   ),
                   Icon(
                     Icons.search,

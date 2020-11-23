@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
           fontWeight: FontWeight.w900),
       headline2: TextStyle(
           color: HexColor('#09071D'),
-          fontSize: 30.0,
+          fontSize: 40.0,
           fontWeight: FontWeight.w900),
       headline3: TextStyle(
           color: HexColor('#09071D'),
@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
           fontWeight: FontWeight.w900),
       subtitle1: TextStyle(
           color: HexColor('#09071D'),
-          fontSize: 15.0,
+          fontSize: 20.0,
           fontWeight: FontWeight.w900),
       subtitle2: TextStyle(color: HexColor('#A6ABBC')),
       bodyText1: TextStyle(
