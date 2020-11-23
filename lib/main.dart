@@ -17,27 +17,34 @@ class MyApp extends StatelessWidget {
     accentColor: HexColor('#DC3735'),
     buttonColor: HexColor('#DC3735'),
     textTheme: TextTheme(
+      // Title
       headline1: TextStyle(
           color: HexColor('#09071D'),
           fontSize: 40.0,
           fontWeight: FontWeight.w900),
+      // Greetig Text
       headline2: TextStyle(
           color: HexColor('#09071D'),
           fontSize: 40.0,
           fontWeight: FontWeight.w900),
+      // Section Text
       headline3: TextStyle(
           color: HexColor('#09071D'),
           fontSize: 25.0,
           fontWeight: FontWeight.w900),
+      // Book Title
       headline4: TextStyle(
           color: HexColor('#09071D'),
           fontSize: 20.0,
           fontWeight: FontWeight.w900),
+      // Subtitle Heading
       subtitle1: TextStyle(
           color: HexColor('#09071D'),
           fontSize: 20.0,
           fontWeight: FontWeight.w900),
-      subtitle2: TextStyle(color: HexColor('#A6ABBC')),
+      // Author
+      subtitle2: TextStyle(color: HexColor('#A6ABBC'), fontSize: 20.0),
+      // Description
       bodyText1: TextStyle(
         color: HexColor('#A6ABBC'),
       ),
