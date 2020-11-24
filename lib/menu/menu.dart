@@ -41,9 +41,8 @@ class _MenuScreenState extends State<MenuScreen> {
                 GestureDetector(
                   onTap: () {
                     Navigator.of(context).pop();
-                    widget.dataBloc.updateSignedInState(false);
                   },
-                  child: Text("Logout",
+                  child: Text("Analyze",
                       style: Theme.of(context).textTheme.headline3),
                 ),
                 Container(
@@ -55,8 +54,9 @@ class _MenuScreenState extends State<MenuScreen> {
                 GestureDetector(
                   onTap: () {
                     Navigator.of(context).pop();
+                    widget.dataBloc.updateSignedInState(false);
                   },
-                  child: Text("Analyze",
+                  child: Text("Logout",
                       style: Theme.of(context).textTheme.headline3),
                 )
               ],
