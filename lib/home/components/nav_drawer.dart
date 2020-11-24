@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'data_bloc.dart';
+import '../../data_bloc.dart';
 
 class NavDrawer extends StatelessWidget {
   final DataBloc dataBloc;

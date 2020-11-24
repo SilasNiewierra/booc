@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'data_bloc.dart';
+import '../data_bloc.dart';
 
 class Login extends StatefulWidget {
   final DataBloc dataBloc;
