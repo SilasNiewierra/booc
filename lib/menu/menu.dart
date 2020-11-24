@@ -54,6 +54,19 @@ class _MenuScreenState extends State<MenuScreen> {
                 GestureDetector(
                   onTap: () {
                     Navigator.of(context).pop();
+                  },
+                  child: Text("Bucket List",
+                      style: Theme.of(context).textTheme.headline3),
+                ),
+                Container(
+                  height: 2.0,
+                  width: 50,
+                  color: Colors.blueGrey[900],
+                  margin: EdgeInsets.symmetric(vertical: 10.0),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).pop();
                     widget.dataBloc.updateSignedInState(false);
                   },
                   child: Text("Logout",

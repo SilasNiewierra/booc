@@ -22,16 +22,25 @@ class _ExploreScreenState extends State<ExploreScreen> {
 
   Widget _buildAppBar() {
     return AppBar(
-      title: Text("Add New Read Books"),
-      elevation: 0,
-      leading: IconButton(
-        icon: SvgPicture.asset(
-          'assets/icons/back.svg',
-          color: Colors.blueGrey[900],
+      automaticallyImplyLeading: false,
+      title: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+        IconButton(
+          icon: SvgPicture.asset(
+            'assets/icons/back.svg',
+            color: Colors.blueGrey[900],
+          ),
+          onPressed: () => Navigator.pop(context),
         ),
-        onPressed: () => Navigator.pop(context),
-      ),
-      actions: [],
+        Text("Add New Read Books"),
+        IconButton(
+          icon: SvgPicture.asset(
+            'assets/icons/back.svg',
+            color: Colors.transparent,
+          ),
+          onPressed: null,
+        ),
+      ]),
+      elevation: 0,
       backgroundColor: Colors.transparent,
     );
   }

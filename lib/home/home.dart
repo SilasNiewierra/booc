@@ -101,9 +101,9 @@ class _HomeState extends State<Home> {
             ? Flexible(
                 child: GridView.count(
                   crossAxisCount: 2,
-                  childAspectRatio: (250 / 390),
-                  crossAxisSpacing: 5,
-                  mainAxisSpacing: 15,
+                  childAspectRatio: (240 / 390),
+                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 5,
                   children: List.generate(
                     readBooksList.length,
                     (index) => _buildCoverBookItem(readBooksList[index]),
@@ -137,7 +137,7 @@ class _HomeState extends State<Home> {
     return Center(
       child: Container(
         height: 390,
-        width: 250,
+        width: 240,
         child: GestureDetector(
           onTap: () {
             Navigator.push(
@@ -152,7 +152,7 @@ class _HomeState extends State<Home> {
             children: [
               Container(
                 height: 340,
-                width: 250,
+                width: 240,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                 ),
@@ -168,7 +168,7 @@ class _HomeState extends State<Home> {
                 ),
               ),
               Container(
-                width: 250,
+                width: 240,
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
