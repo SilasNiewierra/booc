@@ -1,3 +1,4 @@
+import 'package:boek/data_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import './components/body.dart';
@@ -5,8 +6,9 @@ import '../model/book.dart';
 
 class DetailScreen extends StatefulWidget {
   final Book bookItem;
+  final DataBloc dataBloc;
 
-  DetailScreen({this.bookItem});
+  DetailScreen({@required this.dataBloc, this.bookItem});
 
   @override
   _DetailScreenState createState() => _DetailScreenState();
@@ -18,7 +20,7 @@ class _DetailScreenState extends State<DetailScreen> {
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
       appBar: _buildAppBar(),
-      body: Body(bookItem: widget.bookItem),
+      body: Body(dataBloc: widget.dataBloc, bookItem: widget.bookItem),
     );
   }
 

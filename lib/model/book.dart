@@ -6,24 +6,16 @@ class Book {
   String title;
   String author;
   String category;
-  // int rating;
-  bool read;
   ValueNotifier<bool> like = new ValueNotifier<bool>(false);
-
-  Book(
-      {this.uniqueId,
-      this.imgUrl,
-      this.title,
-      this.author,
-      this.category,
-      this.read});
+  ValueNotifier<bool> read = new ValueNotifier<bool>(false);
+  Book({this.uniqueId, this.imgUrl, this.title, this.author, this.category});
 
   updateRating(bool like) {
     this.like.value = like;
   }
 
   updateRead(bool readUpdate) {
-    this.read = readUpdate;
+    this.read.value = readUpdate;
   }
 }
 
@@ -33,64 +25,55 @@ List<Book> bookListDummy = [
       imgUrl: 'book-burnt.jpeg',
       title: 'Burnt Sugar',
       author: 'Avni Doshi',
-      category: 'Novel',
-      read: false),
+      category: 'Novel'),
   Book(
       uniqueId: 'e1',
       imgUrl: 'book-chanel.jpeg',
       title: 'Chanel',
       author: 'Thomas Hudson',
-      category: 'Biography',
-      read: false),
+      category: 'Biography'),
   Book(
       uniqueId: 'e2',
       imgUrl: 'book-halsey.jpeg',
       title: 'I Would leave my body if I could',
       author: 'Halsey',
-      category: 'Biography',
-      read: false),
+      category: 'Biography'),
   Book(
       uniqueId: 'e3',
       imgUrl: 'book-milk.jpeg',
       title: 'Milk and honey',
       author: 'Rupi Kaur',
-      category: 'Novel',
-      read: true),
+      category: 'Novel'),
   Book(
       uniqueId: 'e4',
       imgUrl: 'book-shadow.jpeg',
       title: 'The shadow king',
       author: 'Maaza Mengiste',
-      category: 'Novel',
-      read: false),
+      category: 'Novel'),
   Book(
       uniqueId: 'e5',
       imgUrl: 'book-0.jpeg',
       title: 'Die Sonnenschwester',
       author: 'Lucinda Riley',
-      category: 'Novel',
-      read: false),
+      category: 'Novel'),
   Book(
       uniqueId: 'e6',
       imgUrl: 'book-1.jpeg',
       title: 'Auf silberner Fährte',
       author: 'Cornelia Funke',
-      category: 'Fantasy',
-      read: true),
+      category: 'Fantasy'),
   Book(
       uniqueId: 'e7',
       imgUrl: 'book-2.jpeg',
       title: 'Der Ickaborg',
       author: 'J. K. Rowling',
-      category: 'Fantasy',
-      read: false),
+      category: 'Fantasy'),
   Book(
       uniqueId: 'e8',
       imgUrl: 'book-3.jpeg',
       title: 'A promised land',
       author: 'Barack Obama',
-      category: 'Biography',
-      read: true),
+      category: 'Biography'),
 ];
 
 String descriptionDummy =

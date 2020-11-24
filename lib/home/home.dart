@@ -1,6 +1,8 @@
 import 'package:boek/data_bloc.dart';
 import 'package:boek/detail/detail_screen.dart';
-import './components/nav_drawer.dart';
+import 'package:boek/explore/explore_screen.dart';
+import 'package:boek/menu/menu.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:flutter/material.dart';
 import '../model/book.dart';
 
@@ -14,15 +16,9 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldKey,
-      drawer: NavDrawer(
-        dataBloc: widget.dataBloc,
-      ),
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: Container(
@@ -32,11 +28,19 @@ class _HomeState extends State<Home> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               GestureDetector(
-                onTap: () => _scaffoldKey.currentState.openDrawer(),
-                child: Image.asset(
-                  'assets/images/user-icon.png',
-                  width: 50,
-                  height: 50,
+                onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          MenuScreen(dataBloc: widget.dataBloc)),
+                ),
+                child: Hero(
+                  tag: 'user-hero',
+                  child: Image.asset(
+                    'assets/images/user-icon.png',
+                    width: 50,
+                    height: 50,
+                  ),
                 ),
               ),
               IconButton(
@@ -72,14 +76,16 @@ class _HomeState extends State<Home> {
               ),
             ),
             _buildReadBooks(),
-            // _buildRecentBooks(),
-            // _buildExploreBooks(),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // Add new book to read list
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => ExploreScreen(dataBloc: widget.dataBloc)),
+          );
         },
         child: Icon(Icons.add),
         backgroundColor: Theme.of(context).accentColor,
@@ -88,17 +94,42 @@ class _HomeState extends State<Home> {
   }
 
   Widget _buildReadBooks() {
-    return Flexible(
-      child: GridView.count(
-        crossAxisCount: 2,
-        childAspectRatio: (250 / 350),
-        crossAxisSpacing: 5,
-        mainAxisSpacing: 5,
-        children: List.generate(
-          bookListDummy.length,
-          (index) => _buildCoverBookItem(bookListDummy[index]),
-        ),
-      ),
+    return ValueListenableBuilder(
+      valueListenable: widget.dataBloc.readBooks,
+      builder: (BuildContext ctx, List<Book> readBooksList, Widget wdgt) {
+        return readBooksList.length > 0
+            ? Flexible(
+                child: GridView.count(
+                  crossAxisCount: 2,
+                  childAspectRatio: (250 / 350),
+                  crossAxisSpacing: 5,
+                  mainAxisSpacing: 5,
+                  children: List.generate(
+                    readBooksList.length,
+                    (index) => _buildCoverBookItem(readBooksList[index]),
+                  ),
+                ),
+              )
+            : Flexible(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset('assets/images/no_books.png'),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 40.0),
+                      child: Text(
+                        "Seem's like you haven't added any books yet. Add your first book now.",
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.headline4.copyWith(
+                              color: HexColor('#B1B1B1'),
+                              fontWeight: FontWeight.w500,
+                            ),
+                      ),
+                    ),
+                  ],
+                ),
+              );
+      },
     );
   }
 
@@ -112,13 +143,13 @@ class _HomeState extends State<Home> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => DetailScreen(bookItem: bookItem)),
+                  builder: (context) => DetailScreen(
+                      dataBloc: widget.dataBloc, bookItem: bookItem)),
             );
           },
           child: Container(
             width: 200,
             decoration: BoxDecoration(
-              color: Colors.teal,
               borderRadius: BorderRadius.circular(10),
             ),
             child: ClipRRect(

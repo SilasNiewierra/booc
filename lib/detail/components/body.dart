@@ -1,10 +1,12 @@
+import 'package:boek/data_bloc.dart';
 import 'package:flutter/material.dart';
 import '../../model/book.dart';
 
 class Body extends StatefulWidget {
   final Book bookItem;
+  final DataBloc dataBloc;
 
-  Body({Key key, this.bookItem}) : super(key: key);
+  Body({Key key, @required this.dataBloc, this.bookItem}) : super(key: key);
 
   @override
   _BodyState createState() => _BodyState();
@@ -77,45 +79,49 @@ class _BodyState extends State<Body> {
                         ),
                       ),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          widget.bookItem.read
-                              ? RaisedButton(
-                                  onPressed: () {
+                          IconButton(
+                            onPressed: () {},
+                            icon: Icon(Icons.share,
+                                color: Theme.of(context).accentColor),
+                          ),
+                          ValueListenableBuilder(
+                            valueListenable: widget.bookItem.read,
+                            builder: (BuildContext ctx, bool read, Widget wdg) {
+                              return FlatButton(
+                                onPressed: () {
+                                  if (read) {
                                     widget.bookItem.updateRead(false);
-                                  },
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(18.0),
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(10.0),
-                                    child: Text("Remove",
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headline4
-                                            .copyWith(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.w100)),
-                                  ),
-                                )
-                              : RaisedButton(
-                                  onPressed: () {
+                                    widget.dataBloc
+                                        .removeReadBook(widget.bookItem);
+                                  } else {
                                     widget.bookItem.updateRead(true);
-                                  },
-                                  shape: RoundedRectangleBorder(
+                                    widget.dataBloc
+                                        .addReadBook(widget.bookItem);
+                                  }
+                                },
+                                color: Colors.transparent,
+                                shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(18.0),
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(10.0),
-                                    child: Text("Add",
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headline4
-                                            .copyWith(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.w100)),
-                                  ),
+                                    side: BorderSide(
+                                        width: 2,
+                                        color: Theme.of(context).accentColor)),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: Text(read ? "Remove" : 'Add',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headline4
+                                          .copyWith(
+                                              color:
+                                                  Theme.of(context).accentColor,
+                                              fontSize: 22.0,
+                                              fontWeight: FontWeight.w700)),
                                 ),
+                              );
+                            },
+                          ),
                         ],
                       ),
                     ],
@@ -149,7 +155,6 @@ class _BodyState extends State<Body> {
                       height: 350,
                       width: 250,
                       decoration: BoxDecoration(
-                        color: Colors.teal,
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: ClipRRect(
