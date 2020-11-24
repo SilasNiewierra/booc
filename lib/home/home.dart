@@ -14,36 +14,50 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       drawer: NavDrawer(
         dataBloc: widget.dataBloc,
+      ),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: Container(
+          margin: EdgeInsets.all(5.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              GestureDetector(
+                onTap: () => _scaffoldKey.currentState.openDrawer(),
+                child: Image.asset(
+                  'assets/images/user-icon.png',
+                  width: 50,
+                  height: 50,
+                ),
+              ),
+              IconButton(
+                icon: Icon(
+                  Icons.search,
+                  color: Colors.blueGrey[600],
+                  size: 30.0,
+                ),
+                onPressed: () {},
+              ),
+            ],
+          ),
+        ),
+        elevation: 0,
+        backgroundColor: Colors.transparent,
       ),
       body: Container(
         padding: EdgeInsets.all(20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              margin: EdgeInsets.symmetric(vertical: 20.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    'assets/images/user-icon.png',
-                    width: 50,
-                    height: 50,
-                  ),
-                  Icon(
-                    Icons.search,
-                    color: Colors.blueGrey[600],
-                    size: 30.0,
-                  ),
-                ],
-              ),
-            ),
             Container(
               margin: EdgeInsets.symmetric(vertical: 20.0),
               child: Column(

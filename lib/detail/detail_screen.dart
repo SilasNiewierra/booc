@@ -28,7 +28,7 @@ class _DetailScreenState extends State<DetailScreen> {
       leading: IconButton(
         icon: SvgPicture.asset(
           'assets/icons/back.svg',
-          color: Colors.white,
+          color: Colors.blueGrey[900],
         ),
         onPressed: () => Navigator.pop(context),
       ),

@@ -13,33 +13,33 @@ class MyApp extends StatelessWidget {
   final ThemeData _themeData = new ThemeData(
     brightness: Brightness.light,
     fontFamily: 'Roboto',
-    primaryColor: HexColor('#2755FF'),
+    primaryColor: Colors.blue[100],
     accentColor: HexColor('#DC3735'),
     buttonColor: HexColor('#DC3735'),
     textTheme: TextTheme(
       // Title
       headline1: TextStyle(
-          color: HexColor('#09071D'),
+          color: Colors.blueGrey[900],
           fontSize: 40.0,
           fontWeight: FontWeight.w900),
       // Greetig Text
       headline2: TextStyle(
-          color: HexColor('#09071D'),
+          color: Colors.blueGrey[900],
           fontSize: 40.0,
           fontWeight: FontWeight.w900),
       // Section Text
       headline3: TextStyle(
-          color: HexColor('#09071D'),
+          color: Colors.blueGrey[900],
           fontSize: 25.0,
           fontWeight: FontWeight.w900),
       // Book Title
       headline4: TextStyle(
-          color: HexColor('#09071D'),
+          color: Colors.blueGrey[900],
           fontSize: 20.0,
           fontWeight: FontWeight.w900),
       // Subtitle Heading
       subtitle1: TextStyle(
-          color: HexColor('#09071D'),
+          color: Colors.blueGrey[900],
           fontSize: 20.0,
           fontWeight: FontWeight.w900),
       // Author
@@ -47,6 +47,7 @@ class MyApp extends StatelessWidget {
       // Description
       bodyText1: TextStyle(
         color: HexColor('#A6ABBC'),
+        fontSize: 20.0,
       ),
     ),
   );
