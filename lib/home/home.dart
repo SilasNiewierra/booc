@@ -19,44 +19,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: Container(
-          margin: EdgeInsets.all(5.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              GestureDetector(
-                onTap: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                          MenuScreen(dataBloc: widget.dataBloc)),
-                ),
-                child: Hero(
-                  tag: 'user-hero',
-                  child: Image.asset(
-                    'assets/images/user-icon.png',
-                    width: 50,
-                    height: 50,
-                  ),
-                ),
-              ),
-              IconButton(
-                icon: Icon(
-                  Icons.search,
-                  color: Colors.blueGrey[600],
-                  size: 30.0,
-                ),
-                onPressed: () {},
-              ),
-            ],
-          ),
-        ),
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-      ),
+      appBar: _buildAppBar(),
       body: Container(
         padding: EdgeInsets.all(20.0),
         child: Column(
@@ -90,6 +53,47 @@ class _HomeState extends State<Home> {
         child: Icon(Icons.add),
         backgroundColor: Theme.of(context).accentColor,
       ),
+    );
+  }
+
+  Widget _buildAppBar() {
+    return AppBar(
+      automaticallyImplyLeading: false,
+      title: Container(
+        margin: EdgeInsets.all(5.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            GestureDetector(
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        MenuScreen(dataBloc: widget.dataBloc)),
+              ),
+              child: Hero(
+                tag: 'user-hero',
+                child: Image.asset(
+                  'assets/images/user-icon.png',
+                  width: 50,
+                  height: 50,
+                ),
+              ),
+            ),
+            IconButton(
+              icon: Icon(
+                Icons.search,
+                color: Colors.blueGrey[600],
+                size: 30.0,
+              ),
+              onPressed: () {},
+            ),
+          ],
+        ),
+      ),
+      elevation: 0,
+      backgroundColor: Colors.transparent,
     );
   }
 
@@ -173,24 +177,26 @@ class _HomeState extends State<Home> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          bookItem.title,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 1,
-                          softWrap: false,
-                          style: Theme.of(context).textTheme.headline4,
-                        ),
-                        Text(
-                          bookItem.author,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 1,
-                          softWrap: false,
-                          style: Theme.of(context).textTheme.subtitle2,
-                        ),
-                      ],
+                    Flexible(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            bookItem.title,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                            softWrap: false,
+                            style: Theme.of(context).textTheme.headline4,
+                          ),
+                          Text(
+                            bookItem.author,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                            softWrap: false,
+                            style: Theme.of(context).textTheme.subtitle2,
+                          ),
+                        ],
+                      ),
                     ),
                     ValueListenableBuilder(
                         valueListenable: bookItem.like,
