@@ -63,7 +63,7 @@ class _HomeState extends State<Home> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              margin: EdgeInsets.symmetric(vertical: 20.0),
+              margin: EdgeInsets.only(bottom: 20.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -101,9 +101,9 @@ class _HomeState extends State<Home> {
             ? Flexible(
                 child: GridView.count(
                   crossAxisCount: 2,
-                  childAspectRatio: (250 / 350),
+                  childAspectRatio: (250 / 390),
                   crossAxisSpacing: 5,
-                  mainAxisSpacing: 5,
+                  mainAxisSpacing: 15,
                   children: List.generate(
                     readBooksList.length,
                     (index) => _buildCoverBookItem(readBooksList[index]),
@@ -136,7 +136,7 @@ class _HomeState extends State<Home> {
   Widget _buildCoverBookItem(Book bookItem) {
     return Center(
       child: Container(
-        height: 350,
+        height: 390,
         width: 250,
         child: GestureDetector(
           onTap: () {
@@ -147,21 +147,63 @@ class _HomeState extends State<Home> {
                       dataBloc: widget.dataBloc, bookItem: bookItem)),
             );
           },
-          child: Container(
-            width: 200,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(8.0),
-              child: Hero(
-                tag: bookItem.uniqueId,
-                child: Image.asset(
-                  'assets/images/' + bookItem.imgUrl,
-                  fit: BoxFit.fill,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                height: 340,
+                width: 250,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(8.0),
+                  child: Hero(
+                    tag: bookItem.uniqueId,
+                    child: Image.asset(
+                      'assets/images/' + bookItem.imgUrl,
+                      fit: BoxFit.fill,
+                    ),
+                  ),
                 ),
               ),
-            ),
+              Container(
+                width: 250,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          bookItem.title,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                          softWrap: false,
+                          style: Theme.of(context).textTheme.headline4,
+                        ),
+                        Text(
+                          bookItem.author,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                          softWrap: false,
+                          style: Theme.of(context).textTheme.subtitle2,
+                        ),
+                      ],
+                    ),
+                    ValueListenableBuilder(
+                        valueListenable: bookItem.like,
+                        builder: (BuildContext ctx, bool like, Widget wdg) {
+                          return Icon(
+                            like ? Icons.favorite : Icons.favorite_border,
+                            color: Theme.of(context).accentColor,
+                          );
+                        }),
+                  ],
+                ),
+              ),
+            ],
           ),
         ),
       ),

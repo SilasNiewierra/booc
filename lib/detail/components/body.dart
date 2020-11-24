@@ -1,5 +1,6 @@
 import 'package:boek/data_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import '../../model/book.dart';
 
 class Body extends StatefulWidget {
@@ -95,10 +96,16 @@ class _BodyState extends State<Body> {
                                     widget.bookItem.updateRead(false);
                                     widget.dataBloc
                                         .removeReadBook(widget.bookItem);
+                                    _createToast("Removed \"" +
+                                        widget.bookItem.title +
+                                        "\" from your list");
                                   } else {
                                     widget.bookItem.updateRead(true);
                                     widget.dataBloc
                                         .addReadBook(widget.bookItem);
+                                    _createToast("Added \"" +
+                                        widget.bookItem.title +
+                                        "\" to your list");
                                   }
                                 },
                                 color: Colors.transparent,
@@ -176,5 +183,16 @@ class _BodyState extends State<Body> {
         )
       ],
     ));
+  }
+
+  void _createToast(String message) {
+    Fluttertoast.showToast(
+        msg: message,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 2,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0);
   }
 }
