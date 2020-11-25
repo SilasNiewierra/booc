@@ -1,4 +1,5 @@
 import 'package:boek/data_bloc.dart';
+import 'package:boek/theme_variables.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import './components/body.dart';
@@ -30,7 +31,7 @@ class _DetailScreenState extends State<DetailScreen> {
       leading: IconButton(
         icon: SvgPicture.asset(
           'assets/icons/back.svg',
-          color: Colors.blueGrey[900],
+          color: detailTextColor,
         ),
         onPressed: () => Navigator.pop(context),
       ),

@@ -1,6 +1,7 @@
 import 'package:boek/model/book.dart';
 import 'package:flutter/material.dart';
 import '../data_bloc.dart';
+import '../theme_variables.dart';
 
 class MenuScreen extends StatefulWidget {
   final DataBloc dataBloc;
@@ -25,14 +26,14 @@ class _MenuScreenState extends State<MenuScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Hero(
-                  tag: 'user-hero',
-                  child: Image.asset(
-                    'assets/images/user-icon.png',
-                    width: 100,
-                    height: 100,
-                  ),
-                ),
+                // Hero(
+                //   tag: 'user-hero',
+                //   child: Image.asset(
+                //     'assets/images/user-icon.png',
+                //     width: 100,
+                //     height: 100,
+                //   ),
+                // ),
                 Container(
                   height: 2.0,
                   width: 50,
@@ -43,12 +44,15 @@ class _MenuScreenState extends State<MenuScreen> {
                     Navigator.of(context).pop();
                   },
                   child: Text("Analyze",
-                      style: Theme.of(context).textTheme.headline3),
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline5
+                          .copyWith(color: defaultTextColor)),
                 ),
                 Container(
                   height: 2.0,
                   width: 50,
-                  color: Colors.blueGrey[900],
+                  color: defaultTextColor,
                   margin: EdgeInsets.symmetric(vertical: 10.0),
                 ),
                 GestureDetector(
@@ -56,12 +60,15 @@ class _MenuScreenState extends State<MenuScreen> {
                     Navigator.of(context).pop();
                   },
                   child: Text("Bucket List",
-                      style: Theme.of(context).textTheme.headline3),
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline5
+                          .copyWith(color: defaultTextColor)),
                 ),
                 Container(
                   height: 2.0,
                   width: 50,
-                  color: Colors.blueGrey[900],
+                  color: defaultTextColor,
                   margin: EdgeInsets.symmetric(vertical: 10.0),
                 ),
                 GestureDetector(
@@ -70,7 +77,10 @@ class _MenuScreenState extends State<MenuScreen> {
                     widget.dataBloc.updateSignedInState(false);
                   },
                   child: Text("Logout",
-                      style: Theme.of(context).textTheme.headline3),
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline5
+                          .copyWith(color: defaultTextColor)),
                 )
               ],
             ),
@@ -82,16 +92,14 @@ class _MenuScreenState extends State<MenuScreen> {
     return AppBar(
       automaticallyImplyLeading: false,
       elevation: 0,
-      actions: [
-        IconButton(
-            icon: Icon(
-              Icons.close,
-              color: Colors.blueGrey[900],
-            ),
-            onPressed: () {
-              Navigator.of(context).pop();
-            })
-      ],
+      leading: IconButton(
+          icon: Icon(
+            Icons.close,
+            color: defaultTextColor,
+          ),
+          onPressed: () {
+            Navigator.of(context).pop();
+          }),
       backgroundColor: Colors.transparent,
     );
   }

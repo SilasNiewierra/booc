@@ -2,9 +2,9 @@ import 'package:boek/data_bloc.dart';
 import 'package:boek/detail/detail_screen.dart';
 import 'package:boek/explore/explore_screen.dart';
 import 'package:boek/menu/menu.dart';
-import 'package:hexcolor/hexcolor.dart';
 import 'package:flutter/material.dart';
 import '../model/book.dart';
+import '../theme_variables.dart';
 
 class Home extends StatefulWidget {
   final DataBloc dataBloc;
@@ -32,9 +32,15 @@ class _HomeState extends State<Home> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text("Hi Alex,",
-                      style: Theme.of(context).textTheme.headline2),
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline4
+                          .copyWith(color: defaultTextColor)),
                   Text("check out what you've read so far.",
-                      style: Theme.of(context).textTheme.subtitle1),
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline6
+                          .copyWith(color: defaultTextColor)),
                 ],
               ),
             ),
@@ -51,7 +57,7 @@ class _HomeState extends State<Home> {
           );
         },
         child: Icon(Icons.add),
-        backgroundColor: Theme.of(context).accentColor,
+        // backgroundColor: Theme.of(context).accentColor,
       ),
     );
   }
@@ -72,19 +78,16 @@ class _HomeState extends State<Home> {
                     builder: (context) =>
                         MenuScreen(dataBloc: widget.dataBloc)),
               ),
-              child: Hero(
-                tag: 'user-hero',
-                child: Image.asset(
-                  'assets/images/user-icon.png',
-                  width: 50,
-                  height: 50,
-                ),
+              child: Icon(
+                Icons.menu,
+                color: defaultTextColor,
+                size: 30.0,
               ),
             ),
             IconButton(
               icon: Icon(
                 Icons.search,
-                color: Colors.blueGrey[600],
+                color: defaultTextColor,
                 size: 30.0,
               ),
               onPressed: () {},
@@ -101,6 +104,7 @@ class _HomeState extends State<Home> {
     return ValueListenableBuilder(
       valueListenable: widget.dataBloc.readBooks,
       builder: (BuildContext ctx, List<Book> readBooksList, Widget wdgt) {
+        Size size = MediaQuery.of(context).size;
         return readBooksList.length > 0
             ? Flexible(
                 child: GridView.count(
@@ -118,14 +122,21 @@ class _HomeState extends State<Home> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Image.asset('assets/images/no_books.png'),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 50.0),
+                      child: Image.asset(
+                        'assets/images/no_books.png',
+                        fit: BoxFit.fill,
+                        width: size.width,
+                      ),
+                    ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 40.0),
                       child: Text(
-                        "Seem's like you haven't added any books yet. Add your first book now.",
+                        "Seem's like you haven't read any books yet. Add your first book now.",
                         textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.headline4.copyWith(
-                              color: HexColor('#B1B1B1'),
+                        style: Theme.of(context).textTheme.headline5.copyWith(
+                              color: disabledTextColor,
                               fontWeight: FontWeight.w500,
                             ),
                       ),
@@ -186,14 +197,20 @@ class _HomeState extends State<Home> {
                             overflow: TextOverflow.ellipsis,
                             maxLines: 1,
                             softWrap: false,
-                            style: Theme.of(context).textTheme.headline4,
+                            style: Theme.of(context)
+                                .textTheme
+                                .headline6
+                                .copyWith(color: defaultTextColor),
                           ),
                           Text(
                             bookItem.author,
                             overflow: TextOverflow.ellipsis,
                             maxLines: 1,
                             softWrap: false,
-                            style: Theme.of(context).textTheme.subtitle2,
+                            style: Theme.of(context)
+                                .textTheme
+                                .subtitle2
+                                .copyWith(color: defaultLightTextColor),
                           ),
                         ],
                       ),
@@ -203,7 +220,7 @@ class _HomeState extends State<Home> {
                         builder: (BuildContext ctx, bool like, Widget wdg) {
                           return Icon(
                             like ? Icons.favorite : Icons.favorite_border,
-                            color: Theme.of(context).accentColor,
+                            // color: Theme.of(context).accentColor,
                           );
                         }),
                   ],

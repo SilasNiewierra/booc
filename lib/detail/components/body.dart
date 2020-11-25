@@ -1,7 +1,9 @@
 import 'package:boek/data_bloc.dart';
+import 'package:boek/toast.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../../model/book.dart';
+import '../../theme_variables.dart';
 
 class Body extends StatefulWidget {
   final Book bookItem;
@@ -25,6 +27,23 @@ class _BodyState extends State<Body> {
           height: size.height,
           child: Stack(
             children: [
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 25.0, horizontal: 50.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      widget.bookItem.author,
+                      style: TextStyle(color: detailTextColor),
+                    ),
+                    Text(
+                      widget.bookItem.title,
+                      style: Theme.of(context).textTheme.headline4.copyWith(
+                          color: detailTextColor, fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+              ),
               Container(
                 margin: EdgeInsets.only(top: size.height * 0.4),
                 padding: EdgeInsets.symmetric(vertical: 25.0, horizontal: 50.0),
@@ -38,6 +57,7 @@ class _BodyState extends State<Body> {
                 child: Container(
                   margin: EdgeInsets.only(top: size.height * 0.05),
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
@@ -45,7 +65,7 @@ class _BodyState extends State<Body> {
                         children: [
                           Text(
                             "Category: " + widget.bookItem.category,
-                            style: Theme.of(context).textTheme.headline4,
+                            style: Theme.of(context).textTheme.headline5,
                           ),
                           ValueListenableBuilder(
                             valueListenable: widget.bookItem.like,
@@ -64,91 +84,86 @@ class _BodyState extends State<Body> {
                           ),
                         ],
                       ),
-
-                      // Trick to keep 100% width
-                      SizedBox(
-                        width: size.width,
-                        child: Container(
-                          color: Colors.green,
-                        ),
-                      ),
                       Container(
                         padding: EdgeInsets.symmetric(vertical: 50.0),
                         child: Text(
                           descriptionDummy,
-                          style: Theme.of(context).textTheme.bodyText1,
+                          style: TextStyle(height: 1.5),
                         ),
                       ),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          IconButton(
-                            onPressed: () {},
-                            icon: Icon(Icons.share,
-                                color: Theme.of(context).accentColor),
+                          Container(
+                            margin: EdgeInsets.only(right: 30.0),
+                            height: 60,
+                            width: 60,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(18),
+                              border: Border.all(
+                                color: Theme.of(context).accentColor,
+                              ),
+                            ),
+                            child: IconButton(
+                              iconSize: 35,
+                              icon: Icon(Icons.add,
+                                  color: Theme.of(context).accentColor),
+                              onPressed: () {},
+                            ),
                           ),
-                          ValueListenableBuilder(
-                            valueListenable: widget.bookItem.read,
-                            builder: (BuildContext ctx, bool read, Widget wdg) {
-                              return FlatButton(
-                                onPressed: () {
-                                  if (read) {
-                                    widget.bookItem.updateRead(false);
-                                    widget.dataBloc
-                                        .removeReadBook(widget.bookItem);
-                                    _createToast("Removed \"" +
-                                        widget.bookItem.title +
-                                        "\" from your list");
-                                  } else {
-                                    widget.bookItem.updateRead(true);
-                                    widget.dataBloc
-                                        .addReadBook(widget.bookItem);
-                                    _createToast("Added \"" +
-                                        widget.bookItem.title +
-                                        "\" to your list");
-                                  }
-                                },
-                                color: Colors.transparent,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(18.0),
-                                    side: BorderSide(
-                                        width: 2,
-                                        color: Theme.of(context).accentColor)),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(10.0),
-                                  child: Text(read ? "Remove" : 'Add',
+                          Expanded(
+                            child: SizedBox(
+                              height: 60,
+                              child: ValueListenableBuilder(
+                                valueListenable: widget.bookItem.read,
+                                builder:
+                                    (BuildContext ctx, bool read, Widget wdg) {
+                                  return FlatButton(
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(18)),
+                                    color: Theme.of(context).accentColor,
+                                    onPressed: () {
+                                      if (read) {
+                                        widget.bookItem.updateRead(false);
+                                        widget.dataBloc
+                                            .removeReadBook(widget.bookItem);
+                                        createToast(
+                                            context,
+                                            "Removed \"" +
+                                                widget.bookItem.title +
+                                                "\" from your read list");
+                                      } else {
+                                        widget.bookItem.updateRead(true);
+                                        widget.dataBloc
+                                            .addReadBook(widget.bookItem);
+                                        createToast(
+                                            context,
+                                            "Added \"" +
+                                                widget.bookItem.title +
+                                                "\" to your read list");
+                                      }
+                                    },
+                                    child: Text(
+                                      read
+                                          ? "Unread".toUpperCase()
+                                          : 'Read'.toUpperCase(),
                                       style: Theme.of(context)
                                           .textTheme
                                           .headline4
                                           .copyWith(
-                                              color:
-                                                  Theme.of(context).accentColor,
+                                              color: detailTextColor,
                                               fontSize: 22.0,
-                                              fontWeight: FontWeight.w700)),
-                                ),
-                              );
-                            },
+                                              fontWeight: FontWeight.bold),
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
                           ),
                         ],
                       ),
                     ],
                   ),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: 25.0, horizontal: 50.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      widget.bookItem.author,
-                      style: Theme.of(context).textTheme.subtitle1,
-                    ),
-                    Text(
-                      widget.bookItem.title,
-                      style: Theme.of(context).textTheme.headline2,
-                    ),
-                  ],
                 ),
               ),
               Container(
@@ -183,16 +198,5 @@ class _BodyState extends State<Body> {
         )
       ],
     ));
-  }
-
-  void _createToast(String message) {
-    Fluttertoast.showToast(
-        msg: message,
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.BOTTOM,
-        timeInSecForIosWeb: 2,
-        backgroundColor: Colors.red,
-        textColor: Colors.white,
-        fontSize: 16.0);
   }
 }

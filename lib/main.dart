@@ -14,8 +14,8 @@ class MyApp extends StatelessWidget {
     brightness: Brightness.light,
     fontFamily: 'Roboto',
     primaryColor: Colors.blue[100],
-    accentColor: HexColor('#DC3735'),
-    buttonColor: HexColor('#DC3735'),
+    accentColor: Colors.pinkAccent,
+    buttonColor: Colors.pinkAccent,
     textTheme: TextTheme(
       // Title
       headline1: TextStyle(
@@ -56,7 +56,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: _themeData,
+      //theme: _themeData,
       home: AppHandler(),
     );
   }
