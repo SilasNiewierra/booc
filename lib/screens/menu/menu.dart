@@ -36,9 +36,7 @@ class _MenuScreenState extends State<MenuScreen> {
                         context,
                         MaterialPageRoute(
                             builder: (context) => AnalyticsScreen(
-                                dataBloc: widget.dataBloc,
-                                seriesList: widget.dataBloc.createAnalytics(),
-                                animate: true)));
+                                dataBloc: widget.dataBloc, animate: true)));
                   },
                   child: Hero(
                     tag: 'analytics',

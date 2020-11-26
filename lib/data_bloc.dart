@@ -70,8 +70,13 @@ class DataBloc {
   String descriptionDummy =
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since. When an unknown printer took a galley.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since. When an unknown printer took a galley.";
 
+  ValueNotifier<List<charts.Series<ChartSegment, String>>> categoryData =
+      ValueNotifier<List<charts.Series<ChartSegment, String>>>(null);
+
   DataBloc() {
     exploreBooks.value = bookListDummy;
+    _createSampleData();
+    categoryData.notifyListeners();
   }
 
   void updateSignedInState(bool state) {
@@ -81,11 +86,15 @@ class DataBloc {
   void addReadBook(Book book) {
     this.readBooks.value.add(book);
     readBooks.notifyListeners();
+    _createSampleData();
+    categoryData.notifyListeners();
   }
 
   void removeReadBook(Book book) {
     this.readBooks.value.remove(book);
     readBooks.notifyListeners();
+    _createSampleData();
+    categoryData.notifyListeners();
   }
 
   void addBucketBook(Book book) {
@@ -98,23 +107,29 @@ class DataBloc {
     bucketBooks.notifyListeners();
   }
 
-  createAnalytics() {
-    /// Create one series with sample hard coded data.
-    final data = [
-      new ChartSegment('Novel', 2),
-      new ChartSegment('Fantasy', 5),
-      new ChartSegment('Biography', 1),
-      new ChartSegment('Science-Fiction', 3),
-    ];
+  /// Create one series with sample hard coded data.
+  void _createSampleData() {
+    var categoryMap = {};
+    readBooks.value.forEach((element) {
+      if (!categoryMap.containsKey(element.category)) {
+        categoryMap[element.category] = 0;
+      }
+      categoryMap[element.category]++;
+    });
 
-    return [
+    List<ChartSegment> data = [];
+    categoryMap.forEach((k, v) {
+      data.add(new ChartSegment(k, v));
+    });
+
+    categoryData.value = [
       new charts.Series<ChartSegment, String>(
         id: 'Segments',
-        domainFn: (ChartSegment segment, _) => segment.segment,
+        domainFn: (ChartSegment segment, _) => segment.category,
         measureFn: (ChartSegment segment, _) => segment.amount,
         data: data,
         labelAccessorFn: (ChartSegment row, _) =>
-            '${row.segment}: ${row.amount}',
+            '${row.category}: ${row.amount}',
       )
     ];
   }
@@ -122,8 +137,8 @@ class DataBloc {
 
 /// Sample data type.
 class ChartSegment {
-  final String segment;
+  final String category;
   final int amount;
 
-  ChartSegment(this.segment, this.amount);
+  ChartSegment(this.category, this.amount);
 }
