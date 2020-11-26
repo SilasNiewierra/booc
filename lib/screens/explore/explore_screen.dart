@@ -1,6 +1,6 @@
-import 'package:boek/_variables.dart';
-import 'package:boek/book_grid_view.dart';
-import 'package:boek/data_bloc.dart';
+import 'package:booc/_variables.dart';
+import 'package:booc/book_grid_view.dart';
+import 'package:booc/data_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 

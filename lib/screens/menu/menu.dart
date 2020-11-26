@@ -1,7 +1,7 @@
-import 'package:boek/_variables.dart';
-import 'package:boek/data_bloc.dart';
-import 'package:boek/screens/analyze/analyze.dart';
-import 'package:boek/screens/bucket_list/bucket_list.dart';
+import 'package:booc/_variables.dart';
+import 'package:booc/data_bloc.dart';
+import 'package:booc/screens/analyze/analyze.dart';
+import 'package:booc/screens/bucket_list/bucket_list.dart';
 import 'package:flutter/material.dart';
 
 class MenuScreen extends StatefulWidget {

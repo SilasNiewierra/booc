@@ -1,6 +1,6 @@
-import 'package:boek/data_bloc.dart';
-import 'package:boek/_variables.dart';
-import 'package:boek/model/book.dart';
+import 'package:booc/data_bloc.dart';
+import 'package:booc/_variables.dart';
+import 'package:booc/model/book.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import './components/body.dart';

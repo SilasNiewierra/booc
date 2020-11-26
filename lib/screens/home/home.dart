@@ -1,8 +1,8 @@
-import 'package:boek/_variables.dart';
-import 'package:boek/data_bloc.dart';
-import 'package:boek/book_grid_view.dart';
-import 'package:boek/screens/explore/explore_screen.dart';
-import 'package:boek/screens/menu/menu.dart';
+import 'package:booc/_variables.dart';
+import 'package:booc/data_bloc.dart';
+import 'package:booc/book_grid_view.dart';
+import 'package:booc/screens/explore/explore_screen.dart';
+import 'package:booc/screens/menu/menu.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
