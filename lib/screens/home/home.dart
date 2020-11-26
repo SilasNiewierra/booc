@@ -2,7 +2,6 @@ import 'package:booc/_variables.dart';
 import 'package:booc/data_bloc.dart';
 import 'package:booc/book_grid_view.dart';
 import 'package:booc/screens/explore/explore_screen.dart';
-import 'package:booc/screens/menu/menu.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
@@ -31,44 +30,6 @@ class _HomeState extends State<Home> {
         },
         child: Icon(Icons.add),
       ),
-    );
-  }
-
-  Widget _buildAppBar() {
-    return AppBar(
-      automaticallyImplyLeading: false,
-      title: Container(
-        margin: EdgeInsets.all(5.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            GestureDetector(
-              onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) =>
-                        MenuScreen(dataBloc: widget.dataBloc)),
-              ),
-              child: Icon(
-                Icons.menu,
-                color: defaultTextColor,
-                size: 30.0,
-              ),
-            ),
-            IconButton(
-              icon: Icon(
-                Icons.search,
-                color: defaultTextColor,
-                size: 30.0,
-              ),
-              onPressed: () {},
-            ),
-          ],
-        ),
-      ),
-      elevation: 0,
-      backgroundColor: Colors.transparent,
     );
   }
 

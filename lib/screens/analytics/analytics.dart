@@ -2,7 +2,6 @@ import 'package:booc/_variables.dart';
 import 'package:booc/book_grid_view.dart';
 import 'package:booc/data_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 
 class AnalyticsScreen extends StatefulWidget {
@@ -22,43 +21,6 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
       appBar: buildAppBar(
           context, widget.dataBloc, "Analytics", PageContext.analytics),
       body: _buildBody(context),
-    );
-  }
-
-  Widget _buildAppBar(BuildContext context) {
-    return AppBar(
-      automaticallyImplyLeading: false,
-      title: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          IconButton(
-            icon: SvgPicture.asset(
-              'assets/icons/back.svg',
-              color: defaultTextColor,
-            ),
-            onPressed: () => Navigator.pop(context),
-          ),
-          Hero(
-            tag: 'analytics',
-            child: Text(
-              "Analytics",
-              style: Theme.of(context)
-                  .textTheme
-                  .headline5
-                  .copyWith(color: defaultTextColor),
-            ),
-          ),
-          IconButton(
-            icon: SvgPicture.asset(
-              'assets/icons/back.svg',
-              color: Colors.transparent,
-            ),
-            onPressed: null,
-          ),
-        ],
-      ),
-      elevation: 0,
-      backgroundColor: Colors.transparent,
     );
   }
 
