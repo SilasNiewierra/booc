@@ -97,9 +97,9 @@ class _BookGridViewState extends State<BookGridView> {
   String _selectEmptyImageAsset() {
     switch (widget.pageContext) {
       case PageContext.bucket:
-        return 'assets/images/no_books.png';
+        return 'assets/images/no_bucket.png';
       case PageContext.explore:
-        return 'assets/images/no_books.png';
+        return 'assets/images/no_network.png';
       case PageContext.home:
         return 'assets/images/no_books.png';
       default:
