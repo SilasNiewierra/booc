@@ -90,7 +90,7 @@ class _BodyState extends State<Body> {
                         color: widget.dataBloc.colorPaletteMap.isNotEmpty
                             ? widget.dataBloc
                                 .colorPaletteMap[widget.bookItem.uniqueId].color
-                            : Theme.of(context).primaryColor,
+                            : Theme.of(context).accentColor,
                         size: 35.0,
                       ),
                       onPressed: () {
@@ -125,7 +125,7 @@ class _BodyState extends State<Body> {
                       color: widget.dataBloc.colorPaletteMap.isNotEmpty
                           ? widget.dataBloc
                               .colorPaletteMap[widget.bookItem.uniqueId].color
-                          : Theme.of(context).primaryColor,
+                          : Theme.of(context).accentColor,
                     ),
                   ),
                   child: ValueListenableBuilder(
@@ -155,7 +155,7 @@ class _BodyState extends State<Body> {
                                       .dataBloc
                                       .colorPaletteMap[widget.bookItem.uniqueId]
                                       .color
-                                  : Theme.of(context).primaryColor,
+                                  : Theme.of(context).accentColor,
                               size: 30,
                             ),
                           ),
@@ -176,7 +176,7 @@ class _BodyState extends State<Body> {
                                   .dataBloc
                                   .colorPaletteMap[widget.bookItem.uniqueId]
                                   .color
-                              : Theme.of(context).primaryColor,
+                              : Theme.of(context).accentColor,
                           onPressed: () {
                             if (read) {
                               widget.bookItem.updateRead(false);

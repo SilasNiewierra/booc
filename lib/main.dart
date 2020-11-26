@@ -1,3 +1,4 @@
+import 'package:booc/_variables.dart';
 import 'package:booc/app_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -15,8 +16,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: AppHandler(),
       theme: ThemeData(
-        primaryColor: Colors.blueGrey[900],
-        accentColor: Colors.blueGrey[900],
+        accentColor: accentColor,
       ),
       // Swipe Navigation Gesture -- Destroys pop up effect of menu
       // theme: ThemeData(

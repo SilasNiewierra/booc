@@ -21,7 +21,7 @@ class _DetailScreenState extends State<DetailScreen> {
     return Scaffold(
       backgroundColor: widget.dataBloc.colorPaletteMap.isNotEmpty
           ? widget.dataBloc.colorPaletteMap[widget.bookItem.uniqueId].color
-          : Theme.of(context).primaryColor,
+          : Theme.of(context).accentColor,
       appBar: _buildAppBar(),
       body: Body(dataBloc: widget.dataBloc, bookItem: widget.bookItem),
     );
@@ -40,7 +40,7 @@ class _DetailScreenState extends State<DetailScreen> {
       actions: [],
       backgroundColor: widget.dataBloc.colorPaletteMap.isNotEmpty
           ? widget.dataBloc.colorPaletteMap[widget.bookItem.uniqueId].color
-          : Theme.of(context).primaryColor,
+          : Theme.of(context).accentColor,
     );
   }
 }

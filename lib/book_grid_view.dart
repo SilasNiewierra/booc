@@ -152,6 +152,7 @@ class _BookGridViewState extends State<BookGridView> {
           return IconButton(
             icon: Icon(
               read ? Icons.remove : Icons.add,
+              color: defaultTextColor,
             ),
             onPressed: () {
               if (read) {
