@@ -1,4 +1,5 @@
 import 'package:boek/_variables.dart';
+import 'package:boek/book_grid_view.dart';
 import 'package:boek/data_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -62,51 +63,55 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
 
   Widget _buildBody(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20.0),
+      padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 50.0),
       child: ValueListenableBuilder(
         valueListenable: widget.dataBloc.categoryData,
         builder: (BuildContext ctx,
             List<charts.Series<ChartSegment, String>> list, Widget wdg) {
-          return Stack(
-            children: [
-              Center(
-                child: charts.PieChart(
-                  list,
-                  animate: widget.animate,
-                  defaultRenderer: new charts.ArcRendererConfig(arcWidth: 50),
-                  behaviors: [
-                    new charts.DatumLegend(
-                      position: charts.BehaviorPosition.bottom,
-                      horizontalFirst: false,
-                      outsideJustification:
-                          charts.OutsideJustification.middleDrawArea,
-                      cellPadding: new EdgeInsets.only(right: 4.0, bottom: 4.0),
-                      entryTextStyle: charts.TextStyleSpec(
-                          fontSize: Theme.of(context)
-                              .textTheme
-                              .headline6
-                              .fontSize
-                              .floor()),
-                    )
-                  ],
-                ),
-              ),
-              Center(
-                child: Container(
-                  padding: EdgeInsets.only(bottom: 80.0),
-                  child: Text(
-                    "Categories",
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline4
-                        .copyWith(color: defaultTextColor),
-                  ),
-                ),
-              )
-            ],
-          );
+          Size size = MediaQuery.of(context).size;
+          return list[0].data.length > 0
+              ? _buildAnalytics(list)
+              : buildEmptyBody(context, PageContext.analytics, size);
         },
       ),
+    );
+  }
+
+  Widget _buildAnalytics(List<charts.Series<ChartSegment, String>> list) {
+    return Stack(
+      children: [
+        Center(
+          child: charts.PieChart(
+            list,
+            animate: widget.animate,
+            defaultRenderer: new charts.ArcRendererConfig(arcWidth: 50),
+            behaviors: [
+              new charts.DatumLegend(
+                position: charts.BehaviorPosition.bottom,
+                horizontalFirst: false,
+                outsideJustification:
+                    charts.OutsideJustification.middleDrawArea,
+                cellPadding: new EdgeInsets.only(right: 4.0, bottom: 4.0),
+                entryTextStyle: charts.TextStyleSpec(
+                    fontSize:
+                        Theme.of(context).textTheme.headline6.fontSize.floor()),
+              )
+            ],
+          ),
+        ),
+        Center(
+          child: Container(
+            padding: EdgeInsets.only(bottom: 80.0),
+            child: Text(
+              "Categories",
+              style: Theme.of(context)
+                  .textTheme
+                  .headline4
+                  .copyWith(color: defaultTextColor),
+            ),
+          ),
+        )
+      ],
     );
   }
 }

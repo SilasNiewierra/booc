@@ -6,4 +6,4 @@ final disabledTextColor = Colors.grey[400];
 
 final detailTextColor = Colors.white;
 
-enum PageContext { bucket, home, explore }
+enum PageContext { bucket, home, explore, analytics }

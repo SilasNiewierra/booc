@@ -34,7 +34,7 @@ class _BookGridViewState extends State<BookGridView> {
                   ),
                 ),
               )
-            : _buildEmptyBody(size);
+            : buildEmptyBody(context, widget.pageContext, size);
       },
     );
   }
@@ -49,61 +49,6 @@ class _BookGridViewState extends State<BookGridView> {
         return widget.dataBloc.readBooks;
       default:
         return widget.dataBloc.readBooks;
-    }
-  }
-
-  Widget _buildEmptyBody(Size size) {
-    return Flexible(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 50.0),
-            child: Image.asset(
-              _selectEmptyImageAsset(),
-              fit: BoxFit.fill,
-              width: size.width,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 40.0),
-            child: Text(
-              _selectEmptyText(),
-              textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.headline5.copyWith(
-                    color: disabledTextColor,
-                    fontWeight: FontWeight.w500,
-                  ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  String _selectEmptyText() {
-    switch (widget.pageContext) {
-      case PageContext.bucket:
-        return "Seem's like you haven't added any books to your Bucket List yet.";
-      case PageContext.explore:
-        return "Seem's like you don't have a network connection";
-      case PageContext.home:
-        return "Seem's like you haven't read any books yet. Add your first book now.";
-      default:
-        return "Seem's like you came here from an unknwon route";
-    }
-  }
-
-  String _selectEmptyImageAsset() {
-    switch (widget.pageContext) {
-      case PageContext.bucket:
-        return 'assets/images/no_bucket.png';
-      case PageContext.explore:
-        return 'assets/images/no_network.png';
-      case PageContext.home:
-        return 'assets/images/no_books.png';
-      default:
-        return 'assets/images/no_books.png';
     }
   }
 
@@ -254,5 +199,65 @@ class _BookGridViewState extends State<BookGridView> {
             },
           );
         });
+  }
+}
+
+Widget buildEmptyBody(
+    BuildContext context, PageContext pageContext, Size size) {
+  return Flexible(
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 50.0),
+          child: Image.asset(
+            _selectEmptyImageAsset(pageContext),
+            fit: BoxFit.fill,
+            width: size.width,
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 40.0),
+          child: Text(
+            _selectEmptyText(pageContext),
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.headline5.copyWith(
+                  color: disabledTextColor,
+                  fontWeight: FontWeight.w500,
+                ),
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
+String _selectEmptyText(PageContext pageContext) {
+  switch (pageContext) {
+    case PageContext.analytics:
+      return "Seem's like you haven't read any books yet. You can only analyze read books.";
+    case PageContext.bucket:
+      return "Seem's like you haven't added any books to your Bucket List yet.";
+    case PageContext.explore:
+      return "Seem's like you don't have a network connection";
+    case PageContext.home:
+      return "Seem's like you haven't read any books yet. Add your first book now.";
+    default:
+      return "Seem's like you came here from an unknwon route";
+  }
+}
+
+String _selectEmptyImageAsset(PageContext pageContext) {
+  switch (pageContext) {
+    case PageContext.analytics:
+      return 'assets/images/no_analytics.png';
+    case PageContext.bucket:
+      return 'assets/images/no_bucket.png';
+    case PageContext.explore:
+      return 'assets/images/no_network.png';
+    case PageContext.home:
+      return 'assets/images/no_books.png';
+    default:
+      return 'assets/images/no_books.png';
   }
 }
