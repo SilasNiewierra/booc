@@ -18,7 +18,8 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buildAppBar(),
+      appBar: buildAppBar(context, widget.dataBloc, "", PageContext.home,
+          home: true),
       body: _buildBody(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {

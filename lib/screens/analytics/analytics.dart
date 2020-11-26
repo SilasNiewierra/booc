@@ -19,7 +19,8 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buildAppBar(context),
+      appBar: buildAppBar(
+          context, widget.dataBloc, "Analytics", PageContext.analytics),
       body: _buildBody(context),
     );
   }

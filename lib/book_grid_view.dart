@@ -1,9 +1,11 @@
+import 'package:booc/_variables.dart';
+import 'package:booc/screens/menu/menu.dart';
 import 'package:booc/data_bloc.dart';
 import 'package:booc/screens/detail/detail_screen.dart';
 import 'package:booc/model/book.dart';
-import 'package:booc/_variables.dart';
 import 'package:booc/toast.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class BookGridView extends StatefulWidget {
   final DataBloc dataBloc;
@@ -200,6 +202,59 @@ class _BookGridViewState extends State<BookGridView> {
           );
         });
   }
+}
+
+Widget buildAppBar(
+    BuildContext context, DataBloc dataBloc, String title, PageContext heroTag,
+    {bool home = false}) {
+  return AppBar(
+    automaticallyImplyLeading: false,
+    title: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        IconButton(
+          icon: home
+              ? GestureDetector(
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => MenuScreen(dataBloc: dataBloc)),
+                  ),
+                  child: Icon(
+                    Icons.menu,
+                    color: defaultTextColor,
+                    size: 30.0,
+                  ),
+                )
+              : SvgPicture.asset(
+                  'assets/icons/back.svg',
+                  color: defaultTextColor,
+                ),
+          onPressed: () => Navigator.pop(context),
+        ),
+        Hero(
+          tag: heroTag,
+          child: Text(
+            title,
+            style: Theme.of(context)
+                .textTheme
+                .headline5
+                .copyWith(color: defaultTextColor),
+          ),
+        ),
+        IconButton(
+          icon: Icon(
+            Icons.search,
+            color: defaultTextColor,
+            size: 30.0,
+          ),
+          onPressed: null,
+        ),
+      ],
+    ),
+    elevation: 0,
+    backgroundColor: Colors.transparent,
+  );
 }
 
 Widget buildEmptyBody(

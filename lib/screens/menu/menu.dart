@@ -1,6 +1,6 @@
 import 'package:booc/_variables.dart';
 import 'package:booc/data_bloc.dart';
-import 'package:booc/screens/analyze/analyze.dart';
+import 'package:booc/screens/analytics/analytics.dart';
 import 'package:booc/screens/bucket_list/bucket_list.dart';
 import 'package:flutter/material.dart';
 
@@ -39,7 +39,7 @@ class _MenuScreenState extends State<MenuScreen> {
                                 dataBloc: widget.dataBloc, animate: true)));
                   },
                   child: Hero(
-                    tag: 'analytics',
+                    tag: PageContext.analytics,
                     child: Text("Analytics",
                         style: Theme.of(context)
                             .textTheme
@@ -62,7 +62,7 @@ class _MenuScreenState extends State<MenuScreen> {
                                 BucketListScreen(dataBloc: widget.dataBloc)));
                   },
                   child: Hero(
-                    tag: 'bucket',
+                    tag: PageContext.bucket,
                     child: Text("Bucket List",
                         style: Theme.of(context)
                             .textTheme

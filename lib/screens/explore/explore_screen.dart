@@ -2,7 +2,6 @@ import 'package:booc/_variables.dart';
 import 'package:booc/book_grid_view.dart';
 import 'package:booc/data_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 class ExploreScreen extends StatefulWidget {
   final DataBloc dataBloc;
@@ -17,41 +16,10 @@ class _ExploreScreenState extends State<ExploreScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: _buildAppBar(), body: _buildBody());
-  }
-
-  Widget _buildAppBar() {
-    return AppBar(
-      automaticallyImplyLeading: false,
-      title: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          IconButton(
-            icon: SvgPicture.asset(
-              'assets/icons/back.svg',
-              color: defaultTextColor,
-            ),
-            onPressed: () => Navigator.pop(context),
-          ),
-          Text(
-            "Find New Books",
-            style: Theme.of(context)
-                .textTheme
-                .headline5
-                .copyWith(color: defaultTextColor),
-          ),
-          IconButton(
-            icon: SvgPicture.asset(
-              'assets/icons/back.svg',
-              color: Colors.transparent,
-            ),
-            onPressed: null,
-          ),
-        ],
-      ),
-      elevation: 0,
-      backgroundColor: Colors.transparent,
-    );
+    return Scaffold(
+        appBar: buildAppBar(
+            context, widget.dataBloc, "Find New Books", PageContext.explore),
+        body: _buildBody());
   }
 
   Widget _buildBody() {
