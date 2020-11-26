@@ -1,7 +1,7 @@
-import 'package:boek/model/book.dart';
+import 'package:boek/bucket_list/bucket_list.dart';
 import 'package:flutter/material.dart';
 import '../data_bloc.dart';
-import '../theme_variables.dart';
+import '../_variables.dart';
 
 class MenuScreen extends StatefulWidget {
   final DataBloc dataBloc;
@@ -12,8 +12,6 @@ class MenuScreen extends StatefulWidget {
 }
 
 class _MenuScreenState extends State<MenuScreen> {
-  final List<Book> allBooks = bookListDummy;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,13 +55,20 @@ class _MenuScreenState extends State<MenuScreen> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Navigator.of(context).pop();
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                BucketListScreen(dataBloc: widget.dataBloc)));
                   },
-                  child: Text("Bucket List",
-                      style: Theme.of(context)
-                          .textTheme
-                          .headline5
-                          .copyWith(color: defaultTextColor)),
+                  child: Hero(
+                    tag: 'bucket',
+                    child: Text("Bucket List",
+                        style: Theme.of(context)
+                            .textTheme
+                            .headline5
+                            .copyWith(color: defaultTextColor)),
+                  ),
                 ),
                 Container(
                   height: 2.0,

@@ -5,3 +5,5 @@ final defaultLightTextColor = Colors.blueGrey[500];
 final disabledTextColor = Colors.grey[400];
 
 final detailTextColor = Colors.white;
+
+enum PageContext { bucket, home, explore }

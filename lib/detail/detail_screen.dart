@@ -1,5 +1,5 @@
 import 'package:boek/data_bloc.dart';
-import 'package:boek/theme_variables.dart';
+import 'package:boek/_variables.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import './components/body.dart';

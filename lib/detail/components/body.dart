@@ -2,7 +2,7 @@ import 'package:boek/data_bloc.dart';
 import 'package:boek/toast.dart';
 import 'package:flutter/material.dart';
 import '../../model/book.dart';
-import '../../theme_variables.dart';
+import '../../_variables.dart';
 
 class Body extends StatefulWidget {
   final Book bookItem;
@@ -76,7 +76,7 @@ class _BodyState extends State<Body> {
                               size: 35.0,
                             ),
                             onPressed: () {
-                              widget.bookItem.updateRating(!like);
+                              widget.bookItem.updateLiked(!like);
                             },
                           );
                         },
@@ -86,7 +86,7 @@ class _BodyState extends State<Body> {
                   Container(
                     padding: EdgeInsets.symmetric(vertical: 50.0),
                     child: Text(
-                      descriptionDummy,
+                      widget.dataBloc.descriptionDummy,
                       style: Theme.of(context)
                           .textTheme
                           .subtitle1
@@ -110,6 +110,7 @@ class _BodyState extends State<Body> {
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(18)),
                           onPressed: () {
+                            widget.dataBloc.addBucketBook(widget.bookItem);
                             createToast(context, "Added to you bucket list");
                           },
                           child: Center(
