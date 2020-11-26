@@ -7,7 +7,7 @@ void createToast(BuildContext context, String message) {
       toastLength: Toast.LENGTH_SHORT,
       gravity: ToastGravity.BOTTOM,
       timeInSecForIosWeb: 2,
-      backgroundColor: Theme.of(context).accentColor,
+      backgroundColor: Theme.of(context).primaryColor,
       textColor: Colors.white,
-      fontSize: 16.0);
+      fontSize: 20.0);
 }

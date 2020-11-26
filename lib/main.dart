@@ -14,6 +14,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: AppHandler(),
+      theme: ThemeData(
+        primaryColor: Colors.blueGrey[900],
+        accentColor: Colors.blueGrey[900],
+      ),
       // Swipe Navigation Gesture -- Destroys pop up effect of menu
       // theme: ThemeData(
       //     pageTransitionsTheme: PageTransitionsTheme(builders: {

@@ -79,6 +79,7 @@ class DataBloc {
   DataBloc() {
     exploreBooks.value = bookListDummy;
     _createSampleData();
+    // ignore: invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member
     categoryData.notifyListeners();
     colorPaletteMap = {};
     _updatePalletes();
@@ -102,25 +103,34 @@ class DataBloc {
 
   void addReadBook(Book book) {
     this.readBooks.value.add(book);
+    // ignore: invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member
     readBooks.notifyListeners();
+    this.bucketBooks.value.remove(book);
+    // ignore: invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member
+    bucketBooks.notifyListeners();
     _createSampleData();
+    // ignore: invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member
     categoryData.notifyListeners();
   }
 
   void removeReadBook(Book book) {
     this.readBooks.value.remove(book);
+    // ignore: invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member
     readBooks.notifyListeners();
     _createSampleData();
+    // ignore: invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member
     categoryData.notifyListeners();
   }
 
   void addBucketBook(Book book) {
     this.bucketBooks.value.add(book);
+    // ignore: invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member
     bucketBooks.notifyListeners();
   }
 
   void removeBucketBook(Book book) {
     this.bucketBooks.value.remove(book);
+    // ignore: invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member
     bucketBooks.notifyListeners();
   }
 

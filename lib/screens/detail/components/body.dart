@@ -87,7 +87,10 @@ class _BodyState extends State<Body> {
                     return IconButton(
                       icon: Icon(
                         like ? Icons.favorite : Icons.favorite_border,
-                        color: Theme.of(context).accentColor,
+                        color: widget.dataBloc.colorPaletteMap.isNotEmpty
+                            ? widget.dataBloc
+                                .colorPaletteMap[widget.bookItem.uniqueId].color
+                            : Theme.of(context).primaryColor,
                         size: 35.0,
                       ),
                       onPressed: () {
@@ -119,7 +122,10 @@ class _BodyState extends State<Body> {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(18),
                     border: Border.all(
-                      color: Theme.of(context).accentColor,
+                      color: widget.dataBloc.colorPaletteMap.isNotEmpty
+                          ? widget.dataBloc
+                              .colorPaletteMap[widget.bookItem.uniqueId].color
+                          : Theme.of(context).primaryColor,
                     ),
                   ),
                   child: ValueListenableBuilder(
@@ -144,7 +150,12 @@ class _BodyState extends State<Body> {
                           child: Center(
                             child: Icon(
                               marked ? Icons.remove : Icons.add,
-                              color: Theme.of(context).accentColor,
+                              color: widget.dataBloc.colorPaletteMap.isNotEmpty
+                                  ? widget
+                                      .dataBloc
+                                      .colorPaletteMap[widget.bookItem.uniqueId]
+                                      .color
+                                  : Theme.of(context).primaryColor,
                               size: 30,
                             ),
                           ),
@@ -160,7 +171,12 @@ class _BodyState extends State<Body> {
                         return FlatButton(
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(18)),
-                          color: Theme.of(context).accentColor,
+                          color: widget.dataBloc.colorPaletteMap.isNotEmpty
+                              ? widget
+                                  .dataBloc
+                                  .colorPaletteMap[widget.bookItem.uniqueId]
+                                  .color
+                              : Theme.of(context).primaryColor,
                           onPressed: () {
                             if (read) {
                               widget.bookItem.updateRead(false);
