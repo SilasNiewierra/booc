@@ -14,11 +14,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: AppHandler(),
-      theme: ThemeData(
-          pageTransitionsTheme: PageTransitionsTheme(builders: {
-        TargetPlatform.android: CupertinoPageTransitionsBuilder(),
-        TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
-      })),
+      // Swipe Navigation Gesture -- Destroys pop up effect of menu
+      // theme: ThemeData(
+      //     pageTransitionsTheme: PageTransitionsTheme(builders: {
+      //   TargetPlatform.android: CupertinoPageTransitionsBuilder(),
+      //   TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+      // })),
     );
   }
 }

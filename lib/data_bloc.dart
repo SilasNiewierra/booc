@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'model/book.dart';
+import 'package:charts_flutter/flutter.dart' as charts;
 
 class DataBloc {
   ValueNotifier<bool> signedIn =
@@ -96,4 +97,33 @@ class DataBloc {
     this.bucketBooks.value.remove(book);
     bucketBooks.notifyListeners();
   }
+
+  createAnalytics() {
+    /// Create one series with sample hard coded data.
+    final data = [
+      new ChartSegment('Novel', 2),
+      new ChartSegment('Fantasy', 5),
+      new ChartSegment('Biography', 1),
+      new ChartSegment('Science-Fiction', 3),
+    ];
+
+    return [
+      new charts.Series<ChartSegment, String>(
+        id: 'Segments',
+        domainFn: (ChartSegment segment, _) => segment.segment,
+        measureFn: (ChartSegment segment, _) => segment.amount,
+        data: data,
+        labelAccessorFn: (ChartSegment row, _) =>
+            '${row.segment}: ${row.amount}',
+      )
+    ];
+  }
+}
+
+/// Sample data type.
+class ChartSegment {
+  final String segment;
+  final int amount;
+
+  ChartSegment(this.segment, this.amount);
 }

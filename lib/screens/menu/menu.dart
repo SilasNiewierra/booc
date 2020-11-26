@@ -1,5 +1,6 @@
 import 'package:boek/_variables.dart';
 import 'package:boek/data_bloc.dart';
+import 'package:boek/screens/analyze/analyze.dart';
 import 'package:boek/screens/bucket_list/bucket_list.dart';
 import 'package:flutter/material.dart';
 
@@ -31,13 +32,22 @@ class _MenuScreenState extends State<MenuScreen> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Navigator.of(context).pop();
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => AnalyticsScreen(
+                                dataBloc: widget.dataBloc,
+                                seriesList: widget.dataBloc.createAnalytics(),
+                                animate: true)));
                   },
-                  child: Text("Analyze",
-                      style: Theme.of(context)
-                          .textTheme
-                          .headline5
-                          .copyWith(color: defaultTextColor)),
+                  child: Hero(
+                    tag: 'analytics',
+                    child: Text("Analytics",
+                        style: Theme.of(context)
+                            .textTheme
+                            .headline5
+                            .copyWith(color: defaultTextColor)),
+                  ),
                 ),
                 Container(
                   height: 2.0,
