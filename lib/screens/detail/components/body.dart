@@ -214,8 +214,8 @@ class _BodyState extends State<Body> {
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Container(
-            height: 350,
-            width: 250,
+            height: 420,
+            width: 300,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
             ),

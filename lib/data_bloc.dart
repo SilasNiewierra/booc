@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'model/book.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
+import 'package:palette_generator/palette_generator.dart';
 
 class DataBloc {
   ValueNotifier<bool> signedIn =
@@ -73,10 +74,26 @@ class DataBloc {
   ValueNotifier<List<charts.Series<ChartSegment, String>>> categoryData =
       ValueNotifier<List<charts.Series<ChartSegment, String>>>(null);
 
+  Map<String, PaletteColor> colorPaletteMap;
+
   DataBloc() {
     exploreBooks.value = bookListDummy;
     _createSampleData();
     categoryData.notifyListeners();
+    colorPaletteMap = {};
+    _updatePalletes();
+  }
+
+  _updatePalletes() async {
+    bookListDummy.forEach((element) async {
+      final PaletteGenerator generator =
+          await PaletteGenerator.fromImageProvider(
+              AssetImage('assets/images/' + element.imgUrl),
+              size: Size(100, 200));
+      colorPaletteMap[element.uniqueId] = generator.darkMutedColor != null
+          ? generator.darkMutedColor
+          : PaletteColor(Colors.blue, 2);
+    });
   }
 
   void updateSignedInState(bool state) {

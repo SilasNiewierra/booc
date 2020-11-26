@@ -19,7 +19,9 @@ class _DetailScreenState extends State<DetailScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).primaryColor,
+      backgroundColor: widget.dataBloc.colorPaletteMap.isNotEmpty
+          ? widget.dataBloc.colorPaletteMap[widget.bookItem.uniqueId].color
+          : Theme.of(context).primaryColor,
       appBar: _buildAppBar(),
       body: Body(dataBloc: widget.dataBloc, bookItem: widget.bookItem),
     );
@@ -36,7 +38,9 @@ class _DetailScreenState extends State<DetailScreen> {
         onPressed: () => Navigator.pop(context),
       ),
       actions: [],
-      backgroundColor: Theme.of(context).primaryColor,
+      backgroundColor: widget.dataBloc.colorPaletteMap.isNotEmpty
+          ? widget.dataBloc.colorPaletteMap[widget.bookItem.uniqueId].color
+          : Theme.of(context).primaryColor,
     );
   }
 }

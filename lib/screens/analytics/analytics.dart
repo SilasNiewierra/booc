@@ -89,20 +89,20 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
             behaviors: [
               new charts.DatumLegend(
                 position: charts.BehaviorPosition.bottom,
-                horizontalFirst: false,
+                // horizontalFirst: false,
                 outsideJustification:
                     charts.OutsideJustification.middleDrawArea,
                 cellPadding: new EdgeInsets.only(right: 4.0, bottom: 4.0),
                 entryTextStyle: charts.TextStyleSpec(
                     fontSize:
                         Theme.of(context).textTheme.headline6.fontSize.floor()),
-              )
+              ),
             ],
           ),
         ),
         Center(
           child: Container(
-            padding: EdgeInsets.only(bottom: 80.0),
+            padding: EdgeInsets.only(bottom: 10.0),
             child: Text(
               "Categories",
               style: Theme.of(context)
