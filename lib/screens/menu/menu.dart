@@ -1,7 +1,7 @@
-import 'package:boek/bucket_list/bucket_list.dart';
+import 'package:boek/_variables.dart';
+import 'package:boek/data_bloc.dart';
+import 'package:boek/screens/bucket_list/bucket_list.dart';
 import 'package:flutter/material.dart';
-import '../data_bloc.dart';
-import '../_variables.dart';
 
 class MenuScreen extends StatefulWidget {
   final DataBloc dataBloc;
@@ -24,14 +24,6 @@ class _MenuScreenState extends State<MenuScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // Hero(
-                //   tag: 'user-hero',
-                //   child: Image.asset(
-                //     'assets/images/user-icon.png',
-                //     width: 100,
-                //     height: 100,
-                //   ),
-                // ),
                 Container(
                   height: 2.0,
                   width: 50,

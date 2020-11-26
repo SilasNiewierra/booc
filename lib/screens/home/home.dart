@@ -1,9 +1,9 @@
+import 'package:boek/_variables.dart';
 import 'package:boek/data_bloc.dart';
-import 'package:boek/explore/explore_screen.dart';
-import 'package:boek/home/components/book_grid_view.dart';
-import 'package:boek/menu/menu.dart';
+import 'package:boek/book_grid_view.dart';
+import 'package:boek/screens/explore/explore_screen.dart';
+import 'package:boek/screens/menu/menu.dart';
 import 'package:flutter/material.dart';
-import '../_variables.dart';
 
 class Home extends StatefulWidget {
   final DataBloc dataBloc;

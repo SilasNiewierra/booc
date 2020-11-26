@@ -1,8 +1,7 @@
 import 'package:boek/data_bloc.dart';
+import 'package:boek/screens/home/home.dart';
+import 'package:boek/screens/login/login.dart';
 import 'package:flutter/material.dart';
-
-import './home/home.dart';
-import 'login/login.dart';
 
 class AppHandler extends StatefulWidget {
   @override

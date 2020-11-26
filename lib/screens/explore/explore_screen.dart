@@ -1,25 +1,23 @@
-import 'package:boek/data_bloc.dart';
 import 'package:boek/_variables.dart';
-import 'package:boek/home/components/book_grid_view.dart';
+import 'package:boek/book_grid_view.dart';
+import 'package:boek/data_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-class BucketListScreen extends StatefulWidget {
+class ExploreScreen extends StatefulWidget {
   final DataBloc dataBloc;
-
-  BucketListScreen({this.dataBloc});
+  ExploreScreen({@required this.dataBloc});
 
   @override
-  _BucketListScreenState createState() => _BucketListScreenState();
+  _ExploreScreenState createState() => _ExploreScreenState();
 }
 
-class _BucketListScreenState extends State<BucketListScreen> {
+class _ExploreScreenState extends State<ExploreScreen> {
+  // final List<Book> allBooks = bookListDummy;
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: _buildAppBar(),
-      body: _buildBody(),
-    );
+    return Scaffold(appBar: _buildAppBar(), body: _buildBody());
   }
 
   Widget _buildAppBar() {
@@ -35,15 +33,12 @@ class _BucketListScreenState extends State<BucketListScreen> {
             ),
             onPressed: () => Navigator.pop(context),
           ),
-          Hero(
-            tag: 'bucket',
-            child: Text(
-              "Bucket List",
-              style: Theme.of(context)
-                  .textTheme
-                  .headline5
-                  .copyWith(color: defaultTextColor),
-            ),
+          Text(
+            "Find New Books",
+            style: Theme.of(context)
+                .textTheme
+                .headline5
+                .copyWith(color: defaultTextColor),
           ),
           IconButton(
             icon: SvgPicture.asset(
@@ -64,7 +59,7 @@ class _BucketListScreenState extends State<BucketListScreen> {
       padding: EdgeInsets.all(20.0),
       child: BookGridView(
         dataBloc: widget.dataBloc,
-        pageContext: PageContext.bucket,
+        pageContext: PageContext.explore,
       ),
     );
   }

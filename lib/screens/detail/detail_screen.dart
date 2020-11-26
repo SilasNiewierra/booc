@@ -1,9 +1,9 @@
 import 'package:boek/data_bloc.dart';
 import 'package:boek/_variables.dart';
+import 'package:boek/model/book.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import './components/body.dart';
-import '../model/book.dart';
 
 class DetailScreen extends StatefulWidget {
   final Book bookItem;

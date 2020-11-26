@@ -1,8 +1,8 @@
+import 'package:boek/_variables.dart';
 import 'package:boek/data_bloc.dart';
+import 'package:boek/model/book.dart';
 import 'package:boek/toast.dart';
 import 'package:flutter/material.dart';
-import '../../model/book.dart';
-import '../../_variables.dart';
 
 class Body extends StatefulWidget {
   final Book bookItem;

@@ -1,5 +1,5 @@
 import 'package:boek/data_bloc.dart';
-import 'package:boek/detail/detail_screen.dart';
+import 'package:boek/screens/detail/detail_screen.dart';
 import 'package:boek/model/book.dart';
 import 'package:boek/_variables.dart';
 import 'package:boek/toast.dart';
