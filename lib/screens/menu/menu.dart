@@ -3,6 +3,7 @@ import 'package:booc/data_bloc.dart';
 import 'package:booc/screens/analytics/analytics.dart';
 import 'package:booc/screens/bucket_list/bucket_list.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class MenuScreen extends StatefulWidget {
   final DataBloc dataBloc;
@@ -97,14 +98,17 @@ class _MenuScreenState extends State<MenuScreen> {
     return AppBar(
       automaticallyImplyLeading: false,
       elevation: 0,
-      leading: IconButton(
-          icon: Icon(
-            Icons.close,
-            color: defaultTextColor,
-          ),
-          onPressed: () {
-            Navigator.of(context).pop();
-          }),
+      title: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          IconButton(
+              icon: SvgPicture.asset('assets/icons/cancel.svg',
+                  color: defaultTextColor),
+              onPressed: () {
+                Navigator.of(context).pop();
+              }),
+        ],
+      ),
       backgroundColor: Colors.transparent,
     );
   }

@@ -22,11 +22,8 @@ Widget buildAppBar(BuildContext context, DataBloc dataBloc, String title,
                     MaterialPageRoute(
                         builder: (context) => MenuScreen(dataBloc: dataBloc)),
                   ),
-                  child: Icon(
-                    Icons.menu,
-                    color: defaultTextColor,
-                    size: 30.0,
-                  ),
+                  child: SvgPicture.asset('assets/icons/menu.svg',
+                      color: defaultTextColor),
                 )
               : SvgPicture.asset(
                   'assets/icons/back.svg',
@@ -76,11 +73,8 @@ Widget buildAppBar(BuildContext context, DataBloc dataBloc, String title,
         ),
         heroTag == PageContext.analytics
             ? IconButton(
-                icon: Icon(
-                  Icons.search,
-                  color: Colors.transparent,
-                  size: 30.0,
-                ),
+                icon: SvgPicture.asset('assets/icons/search.svg',
+                    color: Colors.transparent),
                 onPressed: null,
               )
             : ValueListenableBuilder(
@@ -88,22 +82,16 @@ Widget buildAppBar(BuildContext context, DataBloc dataBloc, String title,
                 builder: (BuildContext ctx, bool searching, Widget wdg) {
                   return searching
                       ? IconButton(
-                          icon: Icon(
-                            Icons.close,
-                            color: defaultTextColor,
-                            size: 30.0,
-                          ),
+                          icon: SvgPicture.asset('assets/icons/cancel.svg',
+                              color: defaultTextColor),
                           onPressed: () {
                             searchClicked.value = false;
                             dataBloc.resetBookItems(heroTag);
                           },
                         )
                       : IconButton(
-                          icon: Icon(
-                            Icons.search,
-                            color: defaultTextColor,
-                            size: 30.0,
-                          ),
+                          icon: SvgPicture.asset('assets/icons/search.svg',
+                              color: defaultTextColor),
                           onPressed: () {
                             searchClicked.value = true;
                           },
