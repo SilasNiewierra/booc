@@ -47,7 +47,7 @@ class _HomeState extends State<Home> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Hi Alex,", style: getH4()),
+                Text("Hi You,", style: getH4()),
                 Text("check out what you've read so far.", style: getH6()),
               ],
             ),
