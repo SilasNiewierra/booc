@@ -1,11 +1,9 @@
 import 'package:booc/_variables.dart';
-import 'package:booc/screens/menu/menu.dart';
 import 'package:booc/data_bloc.dart';
 import 'package:booc/screens/detail/detail_screen.dart';
 import 'package:booc/model/book.dart';
 import 'package:booc/toast.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class BookGridView extends StatefulWidget {
   final DataBloc dataBloc;
@@ -22,7 +20,6 @@ class _BookGridViewState extends State<BookGridView> {
     return ValueListenableBuilder(
       valueListenable: _selectContent(),
       builder: (BuildContext ctx, List<Book> bookList, Widget wdgt) {
-        Size size = MediaQuery.of(context).size;
         return bookList.length > 0
             ? Flexible(
                 child: GridView.count(
@@ -36,7 +33,7 @@ class _BookGridViewState extends State<BookGridView> {
                   ),
                 ),
               )
-            : buildEmptyBody(context, widget.pageContext, size);
+            : buildEmptyBody(context, widget.pageContext);
       },
     );
   }
@@ -44,13 +41,13 @@ class _BookGridViewState extends State<BookGridView> {
   ValueNotifier<List<Book>> _selectContent() {
     switch (widget.pageContext) {
       case PageContext.bucket:
-        return widget.dataBloc.bucketBooks;
+        return widget.dataBloc.bucketBookItems;
       case PageContext.explore:
-        return widget.dataBloc.exploreBooks;
+        return widget.dataBloc.exploreBookItems;
       case PageContext.home:
-        return widget.dataBloc.readBooks;
+        return widget.dataBloc.readBookItems;
       default:
-        return widget.dataBloc.readBooks;
+        return widget.dataBloc.readBookItems;
     }
   }
 
@@ -205,61 +202,7 @@ class _BookGridViewState extends State<BookGridView> {
   }
 }
 
-Widget buildAppBar(
-    BuildContext context, DataBloc dataBloc, String title, PageContext heroTag,
-    {bool home = false}) {
-  return AppBar(
-    automaticallyImplyLeading: false,
-    title: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        IconButton(
-          icon: home
-              ? GestureDetector(
-                  onTap: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => MenuScreen(dataBloc: dataBloc)),
-                  ),
-                  child: Icon(
-                    Icons.menu,
-                    color: defaultTextColor,
-                    size: 30.0,
-                  ),
-                )
-              : SvgPicture.asset(
-                  'assets/icons/back.svg',
-                  color: defaultTextColor,
-                ),
-          onPressed: () => Navigator.pop(context),
-        ),
-        Hero(
-          tag: heroTag,
-          child: Text(
-            title,
-            style: Theme.of(context)
-                .textTheme
-                .headline5
-                .copyWith(color: defaultTextColor),
-          ),
-        ),
-        IconButton(
-          icon: Icon(
-            Icons.search,
-            color: defaultTextColor,
-            size: 30.0,
-          ),
-          onPressed: null,
-        ),
-      ],
-    ),
-    elevation: 0,
-    backgroundColor: Colors.transparent,
-  );
-}
-
-Widget buildEmptyBody(
-    BuildContext context, PageContext pageContext, Size size) {
+Widget buildEmptyBody(BuildContext context, PageContext pageContext) {
   return Flexible(
     child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -269,7 +212,7 @@ Widget buildEmptyBody(
           child: Image.asset(
             _selectEmptyImageAsset(pageContext),
             fit: BoxFit.fill,
-            width: size.width,
+            width: 500,
           ),
         ),
         Padding(
@@ -315,5 +258,41 @@ String _selectEmptyImageAsset(PageContext pageContext) {
       return 'assets/images/no_books.png';
     default:
       return 'assets/images/no_books.png';
+  }
+}
+
+void filterSearchResults(
+    String query, DataBloc dataBloc, PageContext pageContext) {
+  List<Book> completeList = List<Book>();
+  switch (pageContext) {
+    case PageContext.bucket:
+      completeList.addAll(dataBloc.bucketBooksList);
+      break;
+    case PageContext.explore:
+      completeList.addAll(dataBloc.exploreBooksList);
+      break;
+    case PageContext.home:
+      completeList.addAll(dataBloc.readBooksList);
+      break;
+    default:
+      completeList.addAll(dataBloc.readBooksList);
+      break;
+  }
+  print("completeList for query: " + query);
+  completeList.forEach((element) => print(element.title));
+  if (query.isNotEmpty) {
+    List<Book> searchResultList = List<Book>();
+    completeList.forEach((item) {
+      if (item.title.toLowerCase().contains(query.toLowerCase()) ||
+          item.author.toLowerCase().contains(query.toLowerCase())) {
+        searchResultList.add(item);
+      }
+    });
+    print("searchResultList: ");
+    searchResultList
+        .forEach((element) => print(element.title + element.author));
+    dataBloc.setBookItems(searchResultList, pageContext);
+  } else {
+    dataBloc.setBookItems(completeList, pageContext);
   }
 }

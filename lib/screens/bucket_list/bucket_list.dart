@@ -1,3 +1,4 @@
+import 'package:booc/app_bar.dart';
 import 'package:booc/data_bloc.dart';
 import 'package:booc/_variables.dart';
 import 'package:booc/book_grid_view.dart';
@@ -13,11 +14,13 @@ class BucketListScreen extends StatefulWidget {
 }
 
 class _BucketListScreenState extends State<BucketListScreen> {
+  TextEditingController editingController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: buildAppBar(
-          context, widget.dataBloc, "Bucket List", PageContext.bucket),
+      appBar: buildAppBar(context, widget.dataBloc, "Bucket List",
+          PageContext.bucket, editingController),
       body: _buildBody(),
     );
   }
@@ -25,9 +28,31 @@ class _BucketListScreenState extends State<BucketListScreen> {
   Widget _buildBody() {
     return Container(
       padding: EdgeInsets.all(20.0),
-      child: BookGridView(
-        dataBloc: widget.dataBloc,
-        pageContext: PageContext.bucket,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            margin: EdgeInsets.only(bottom: 20.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("Bucket List,",
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline4
+                        .copyWith(color: defaultTextColor)),
+                Text("here are the books you saved for later.",
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline6
+                        .copyWith(color: defaultTextColor)),
+              ],
+            ),
+          ),
+          BookGridView(
+              dataBloc: widget.dataBloc, pageContext: PageContext.bucket),
+        ],
       ),
     );
   }

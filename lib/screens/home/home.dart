@@ -1,4 +1,5 @@
 import 'package:booc/_variables.dart';
+import 'package:booc/app_bar.dart';
 import 'package:booc/data_bloc.dart';
 import 'package:booc/book_grid_view.dart';
 import 'package:booc/screens/explore/explore_screen.dart';
@@ -14,11 +15,13 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  TextEditingController editingController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: buildAppBar(context, widget.dataBloc, "", PageContext.home,
-          home: true),
+      appBar: buildAppBar(
+          context, widget.dataBloc, "", PageContext.home, editingController),
       body: _buildBody(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {

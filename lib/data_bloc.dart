@@ -1,3 +1,4 @@
+import 'package:booc/_variables.dart';
 import 'package:flutter/material.dart';
 import 'model/book.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
@@ -7,9 +8,17 @@ class DataBloc {
   ValueNotifier<bool> signedIn =
       ValueNotifier<bool>(true); //testing purpose true usually false
 
+  List<Book> readBooksList = [];
+  List<Book> bucketBooksList = [];
+  List<Book> exploreBooksList = [];
+
   ValueNotifier<List<Book>> readBooks = ValueNotifier<List<Book>>([]);
   ValueNotifier<List<Book>> bucketBooks = ValueNotifier<List<Book>>([]);
   ValueNotifier<List<Book>> exploreBooks = ValueNotifier<List<Book>>([]);
+
+  ValueNotifier<List<Book>> readBookItems = ValueNotifier<List<Book>>([]);
+  ValueNotifier<List<Book>> bucketBookItems = ValueNotifier<List<Book>>([]);
+  ValueNotifier<List<Book>> exploreBookItems = ValueNotifier<List<Book>>([]);
 
   List<Book> bookListDummy = [
     Book(
@@ -77,10 +86,14 @@ class DataBloc {
   Map<String, PaletteColor> colorPaletteMap;
 
   DataBloc() {
-    exploreBooks.value = bookListDummy;
-    _createSampleData();
+    exploreBooksList = bookListDummy;
+    exploreBookItems.value = exploreBooksList;
+    // Analytics
+    _createAnalyticsData();
     // ignore: invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member
     categoryData.notifyListeners();
+
+    // Color Palette for Detail Pages
     colorPaletteMap = {};
     _updatePalletes();
   }
@@ -102,42 +115,121 @@ class DataBloc {
   }
 
   void addReadBook(Book book) {
-    this.readBooks.value.add(book);
+    readBooksList.add(book);
+
+    // Add book to read list
+    // this.readBooks.value.add(book);
     // ignore: invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member
-    readBooks.notifyListeners();
-    this.bucketBooks.value.remove(book);
+    // readBooks.notifyListeners();
+
+    readBookItems.value.add(book);
     // ignore: invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member
-    bucketBooks.notifyListeners();
-    _createSampleData();
+    readBookItems.notifyListeners();
+
+    // Remove book from bucket list if it has been read
+    removeBucketBook(book);
+
+    // this.bucketBooks.value.remove(book);
+    // ignore: invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member
+    // bucketBooks.notifyListeners();
+
+    // Create Analytics
+    _createAnalyticsData();
     // ignore: invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member
     categoryData.notifyListeners();
   }
 
   void removeReadBook(Book book) {
-    this.readBooks.value.remove(book);
+    readBooksList.remove(book);
+    readBookItems.value.remove(book);
     // ignore: invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member
-    readBooks.notifyListeners();
-    _createSampleData();
+    readBookItems.notifyListeners();
+
+    // this.readBooks.value.remove(book);
+    // ignore: invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member
+    // readBooks.notifyListeners();
+
+    // Analytics
+    _createAnalyticsData();
     // ignore: invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member
     categoryData.notifyListeners();
   }
 
   void addBucketBook(Book book) {
-    this.bucketBooks.value.add(book);
+    bucketBooksList.add(book);
+    bucketBookItems.value.add(book);
     // ignore: invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member
-    bucketBooks.notifyListeners();
+    bucketBookItems.notifyListeners();
+
+    // this.bucketBooks.value.add(book);
+    // ignore: invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member
+    // bucketBooks.notifyListeners();
   }
 
   void removeBucketBook(Book book) {
-    this.bucketBooks.value.remove(book);
+    bucketBooksList.remove(book);
+    bucketBookItems.value.remove(book);
     // ignore: invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member
-    bucketBooks.notifyListeners();
+    bucketBookItems.notifyListeners();
+    // this.bucketBooks.value.remove(book);
+    // ignore: invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member
+    // bucketBooks.notifyListeners();
+  }
+
+  void setBookItems(List<Book> booksToDisplay, PageContext pageContext) {
+    switch (pageContext) {
+      case PageContext.bucket:
+        bucketBookItems.value = booksToDisplay;
+        // ignore: invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member
+        bucketBookItems.notifyListeners();
+
+        break;
+      case PageContext.explore:
+        exploreBookItems.value = booksToDisplay;
+        // ignore: invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member
+        exploreBookItems.notifyListeners();
+        break;
+      case PageContext.home:
+        readBookItems.value = booksToDisplay;
+        // ignore: invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member
+        readBookItems.notifyListeners();
+        break;
+      default:
+        readBookItems.value = booksToDisplay;
+        // ignore: invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member
+        readBookItems.notifyListeners();
+    }
+  }
+
+  void resetBookItems(PageContext pageContext) {
+    switch (pageContext) {
+      case PageContext.bucket:
+        bucketBookItems.value = bucketBooksList;
+        // ignore: invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member
+        bucketBookItems.notifyListeners();
+
+        break;
+      case PageContext.explore:
+        exploreBookItems.value = exploreBooksList;
+        // ignore: invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member
+        exploreBookItems.notifyListeners();
+        break;
+      case PageContext.home:
+        readBookItems.value = readBooksList;
+        // ignore: invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member
+        readBookItems.notifyListeners();
+        break;
+      default:
+        readBookItems.value = readBooksList;
+        // ignore: invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member
+        readBookItems.notifyListeners();
+    }
   }
 
   /// Create one series with sample hard coded data.
-  void _createSampleData() {
+  void _createAnalyticsData() {
     var categoryMap = {};
-    readBooks.value.forEach((element) {
+    readBookItems.value.forEach((element) {
       if (!categoryMap.containsKey(element.category)) {
         categoryMap[element.category] = 0;
       }
