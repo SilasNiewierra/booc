@@ -15,13 +15,10 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  TextEditingController editingController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: buildAppBar(
-          context, widget.dataBloc, "", PageContext.home, editingController),
+      appBar: buildAppBar(context, widget.dataBloc, "", PageContext.home),
       body: _buildBody(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -39,6 +36,8 @@ class _HomeState extends State<Home> {
   Widget _buildBody() {
     return Container(
       padding: EdgeInsets.all(20.0),
+      // child: BookGridView(
+      //     dataBloc: widget.dataBloc, pageContext: PageContext.home),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -61,8 +60,10 @@ class _HomeState extends State<Home> {
               ],
             ),
           ),
-          BookGridView(
-              dataBloc: widget.dataBloc, pageContext: PageContext.home),
+          Expanded(
+            child: BookGridView(
+                dataBloc: widget.dataBloc, pageContext: PageContext.home),
+          ),
         ],
       ),
     );

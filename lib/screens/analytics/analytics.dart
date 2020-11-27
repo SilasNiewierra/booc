@@ -16,13 +16,11 @@ class AnalyticsScreen extends StatefulWidget {
 }
 
 class _AnalyticsScreenState extends State<AnalyticsScreen> {
-  TextEditingController editingController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: buildAppBar(context, widget.dataBloc, "Analytics",
-          PageContext.analytics, editingController),
+      appBar: buildAppBar(
+          context, widget.dataBloc, "Analytics", PageContext.analytics),
       body: _buildBody(context),
     );
   }

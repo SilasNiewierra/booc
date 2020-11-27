@@ -14,13 +14,11 @@ class BucketListScreen extends StatefulWidget {
 }
 
 class _BucketListScreenState extends State<BucketListScreen> {
-  TextEditingController editingController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: buildAppBar(context, widget.dataBloc, "Bucket List",
-          PageContext.bucket, editingController),
+      appBar: buildAppBar(
+          context, widget.dataBloc, "Bucket List", PageContext.bucket),
       body: _buildBody(),
     );
   }
@@ -50,8 +48,10 @@ class _BucketListScreenState extends State<BucketListScreen> {
               ],
             ),
           ),
-          BookGridView(
-              dataBloc: widget.dataBloc, pageContext: PageContext.bucket),
+          Expanded(
+            child: BookGridView(
+                dataBloc: widget.dataBloc, pageContext: PageContext.bucket),
+          ),
         ],
       ),
     );

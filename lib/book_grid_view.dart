@@ -21,16 +21,14 @@ class _BookGridViewState extends State<BookGridView> {
       valueListenable: _selectContent(),
       builder: (BuildContext ctx, List<Book> bookList, Widget wdgt) {
         return bookList.length > 0
-            ? Flexible(
-                child: GridView.count(
-                  crossAxisCount: 2,
-                  childAspectRatio: (240 / 390),
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 5,
-                  children: List.generate(
-                    bookList.length,
-                    (index) => _buildItem(bookList[index]),
-                  ),
+            ? GridView.count(
+                crossAxisCount: 2,
+                childAspectRatio: (240 / 390),
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 5,
+                children: List.generate(
+                  bookList.length,
+                  (index) => _buildItem(bookList[index]),
                 ),
               )
             : buildEmptyBody(context, widget.pageContext);
@@ -203,7 +201,7 @@ class _BookGridViewState extends State<BookGridView> {
 }
 
 Widget buildEmptyBody(BuildContext context, PageContext pageContext) {
-  return Flexible(
+  return Center(
     child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -278,8 +276,7 @@ void filterSearchResults(
       completeList.addAll(dataBloc.readBooksList);
       break;
   }
-  print("completeList for query: " + query);
-  completeList.forEach((element) => print(element.title));
+
   if (query.isNotEmpty) {
     List<Book> searchResultList = List<Book>();
     completeList.forEach((item) {
@@ -288,9 +285,6 @@ void filterSearchResults(
         searchResultList.add(item);
       }
     });
-    print("searchResultList: ");
-    searchResultList
-        .forEach((element) => print(element.title + element.author));
     dataBloc.setBookItems(searchResultList, pageContext);
   } else {
     dataBloc.setBookItems(completeList, pageContext);

@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 Widget buildAppBar(BuildContext context, DataBloc dataBloc, String title,
-    PageContext heroTag, TextEditingController editingController) {
+    PageContext heroTag) {
   ValueNotifier<bool> searchClicked = ValueNotifier<bool>(false);
 
   return AppBar(

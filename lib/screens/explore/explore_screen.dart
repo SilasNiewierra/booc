@@ -13,14 +13,11 @@ class ExploreScreen extends StatefulWidget {
 }
 
 class _ExploreScreenState extends State<ExploreScreen> {
-  // final List<Book> allBooks = bookListDummy;
-  TextEditingController editingController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: buildAppBar(context, widget.dataBloc, "Find New Books",
-            PageContext.explore, editingController),
+        appBar: buildAppBar(
+            context, widget.dataBloc, "Find New Books", PageContext.explore),
         body: _buildBody());
   }
 
