@@ -2,6 +2,7 @@ import 'package:booc/data_bloc.dart';
 import 'package:booc/screens/home/home.dart';
 import 'package:booc/screens/login/login.dart';
 import 'package:flutter/material.dart';
+import '_variables.dart';
 
 class AppHandler extends StatefulWidget {
   @override
@@ -19,6 +20,8 @@ class _AppHandlerState extends State<AppHandler> {
 
   @override
   Widget build(BuildContext context) {
+    MediaQueryData queryData = MediaQuery.of(context);
+    setDeviceData(queryData.size.width, queryData.size.height);
     return Container(
       child: ValueListenableBuilder(
         valueListenable: _dataBloc.signedIn,

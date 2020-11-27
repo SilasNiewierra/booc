@@ -52,8 +52,8 @@ class _BookGridViewState extends State<BookGridView> {
   Widget _buildItem(Book bookItem) {
     return Center(
       child: Container(
-        height: 390,
-        width: 240,
+        height: getDeviceHeight() / 2.7,
+        width: (getDeviceHeight() / 2.7) * 0.75,
         child: GestureDetector(
           onTap: () {
             Navigator.push(
@@ -67,8 +67,8 @@ class _BookGridViewState extends State<BookGridView> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
-                height: 340,
-                width: 240,
+                height: (getDeviceHeight() / 3.5),
+                width: (getDeviceHeight() / 2.7) * 0.75,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                 ),
@@ -84,7 +84,7 @@ class _BookGridViewState extends State<BookGridView> {
                 ),
               ),
               Container(
-                width: 240,
+                width: (getDeviceHeight() / 2.7) * 0.75,
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -98,20 +98,14 @@ class _BookGridViewState extends State<BookGridView> {
                             overflow: TextOverflow.ellipsis,
                             maxLines: 1,
                             softWrap: false,
-                            style: Theme.of(context)
-                                .textTheme
-                                .headline6
-                                .copyWith(color: defaultTextColor),
+                            style: getH6(),
                           ),
                           Text(
                             bookItem.author,
                             overflow: TextOverflow.ellipsis,
                             maxLines: 1,
                             softWrap: false,
-                            style: Theme.of(context)
-                                .textTheme
-                                .subtitle2
-                                .copyWith(color: defaultLightTextColor),
+                            style: getAuthorStyle(),
                           ),
                         ],
                       ),
@@ -210,7 +204,7 @@ Widget buildEmptyBody(BuildContext context, PageContext pageContext) {
           child: Image.asset(
             _selectEmptyImageAsset(pageContext),
             fit: BoxFit.fill,
-            width: 500,
+            width: getDeviceWidth(),
           ),
         ),
         Padding(
@@ -218,10 +212,7 @@ Widget buildEmptyBody(BuildContext context, PageContext pageContext) {
           child: Text(
             _selectEmptyText(pageContext),
             textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.headline5.copyWith(
-                  color: disabledTextColor,
-                  fontWeight: FontWeight.w500,
-                ),
+            style: getDisabledText(),
           ),
         ),
       ],

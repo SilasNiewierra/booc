@@ -47,16 +47,8 @@ class _HomeState extends State<Home> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Hi Alex,",
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline4
-                        .copyWith(color: defaultTextColor)),
-                Text("check out what you've read so far.",
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline6
-                        .copyWith(color: defaultTextColor)),
+                Text("Hi Alex,", style: getH4()),
+                Text("check out what you've read so far.", style: getH6()),
               ],
             ),
           ),

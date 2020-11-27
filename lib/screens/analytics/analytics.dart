@@ -25,22 +25,6 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
     );
   }
 
-  // Widget _buildBody(BuildContext context) {
-  //   return Padding(
-  //     padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 50.0),
-  //     child: ValueListenableBuilder(
-  //       valueListenable: widget.dataBloc.categoryData,
-  //       builder: (BuildContext ctx,
-  //           List<charts.Series<ChartSegment, String>> list, Widget wdg) {
-  //         Size size = MediaQuery.of(context).size;
-  //         return list[0].data.length > 0
-  //             ? _buildAnalytics(list)
-  //             : buildEmptyBody(context, PageContext.analytics, size);
-  //       },
-  //     ),
-  //   );
-  // }
-
   Widget _buildBody(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(20.0),
@@ -53,16 +37,9 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Analytics,",
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline4
-                        .copyWith(color: defaultTextColor)),
+                Text("Analytics,", style: getH4()),
                 Text("a visual representation of your read categories.",
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline6
-                        .copyWith(color: defaultTextColor)),
+                    style: getH6()),
               ],
             ),
           ),
@@ -73,7 +50,8 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
               Size size = MediaQuery.of(context).size;
               return list[0].data.length > 0
                   ? _buildAnalytics(list, size)
-                  : buildEmptyBody(context, PageContext.analytics);
+                  : Expanded(
+                      child: buildEmptyBody(context, PageContext.analytics));
             },
           ),
         ],
@@ -99,12 +77,8 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
                   outsideJustification:
                       charts.OutsideJustification.middleDrawArea,
                   cellPadding: new EdgeInsets.only(right: 4.0, bottom: 4.0),
-                  entryTextStyle: charts.TextStyleSpec(
-                      fontSize: Theme.of(context)
-                          .textTheme
-                          .headline6
-                          .fontSize
-                          .floor()),
+                  entryTextStyle:
+                      charts.TextStyleSpec(fontSize: getH5().fontSize.floor()),
                 ),
               ],
             ),
@@ -114,10 +88,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
               padding: EdgeInsets.only(bottom: 10.0),
               child: Text(
                 "Categories",
-                style: Theme.of(context)
-                    .textTheme
-                    .headline4
-                    .copyWith(color: defaultTextColor),
+                style: getH4().copyWith(fontWeight: FontWeight.w100),
               ),
             ),
           )

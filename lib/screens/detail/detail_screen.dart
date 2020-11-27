@@ -3,7 +3,7 @@ import 'package:booc/_variables.dart';
 import 'package:booc/model/book.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import './components/body.dart';
+import 'body.dart';
 
 class DetailScreen extends StatefulWidget {
   final Book bookItem;

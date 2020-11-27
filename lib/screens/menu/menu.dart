@@ -39,14 +39,7 @@ class _MenuScreenState extends State<MenuScreen> {
                             builder: (context) => AnalyticsScreen(
                                 dataBloc: widget.dataBloc, animate: true)));
                   },
-                  child: Hero(
-                    tag: PageContext.analytics,
-                    child: Text("Analytics",
-                        style: Theme.of(context)
-                            .textTheme
-                            .headline5
-                            .copyWith(color: defaultTextColor)),
-                  ),
+                  child: Text("Analytics", style: getH5()),
                 ),
                 Container(
                   height: 2.0,
@@ -62,14 +55,7 @@ class _MenuScreenState extends State<MenuScreen> {
                             builder: (context) =>
                                 BucketListScreen(dataBloc: widget.dataBloc)));
                   },
-                  child: Hero(
-                    tag: PageContext.bucket,
-                    child: Text("Bucket List",
-                        style: Theme.of(context)
-                            .textTheme
-                            .headline5
-                            .copyWith(color: defaultTextColor)),
-                  ),
+                  child: Text("Bucket List", style: getH5()),
                 ),
                 // Container(
                 //   height: 2.0,
@@ -83,10 +69,7 @@ class _MenuScreenState extends State<MenuScreen> {
                 //     widget.dataBloc.updateSignedInState(false);
                 //   },
                 //   child: Text("Logout",
-                //       style: Theme.of(context)
-                //           .textTheme
-                //           .headline5
-                //           .copyWith(color: defaultTextColor)),
+                //       style: getH5()),
                 // )
               ],
             ),

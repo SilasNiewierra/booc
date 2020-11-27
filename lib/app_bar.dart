@@ -8,7 +8,6 @@ import 'package:flutter_svg/svg.dart';
 Widget buildAppBar(BuildContext context, DataBloc dataBloc, String title,
     PageContext heroTag) {
   ValueNotifier<bool> searchClicked = ValueNotifier<bool>(false);
-
   return AppBar(
     automaticallyImplyLeading: false,
     title: Row(
@@ -29,18 +28,11 @@ Widget buildAppBar(BuildContext context, DataBloc dataBloc, String title,
                   'assets/icons/back.svg',
                   color: defaultTextColor,
                 ),
-          onPressed: () => Navigator.pop(context),
+          onPressed: () {
+            Navigator.pop(context);
+            dataBloc.resetBookItems(heroTag);
+          },
         ),
-        // Hero(
-        //   tag: heroTag,
-        //   child: Text(
-        //     title,
-        //     style: Theme.of(context)
-        //         .textTheme
-        //         .headline5
-        //         .copyWith(color: defaultTextColor),
-        //   ),
-        // ),
         ValueListenableBuilder(
           valueListenable: searchClicked,
           builder: (BuildContext ctx, bool searchClicked, Widget wdg) {
@@ -52,10 +44,7 @@ Widget buildAppBar(BuildContext context, DataBloc dataBloc, String title,
                         filterSearchResults(value, dataBloc, heroTag);
                       },
                       textAlign: TextAlign.center,
-                      style: Theme.of(context)
-                          .textTheme
-                          .headline6
-                          .copyWith(decoration: TextDecoration.none),
+                      style: getH6().copyWith(decoration: TextDecoration.none),
                       decoration: InputDecoration(
                         enabledBorder: UnderlineInputBorder(
                           borderSide: BorderSide(color: defaultTextColor),

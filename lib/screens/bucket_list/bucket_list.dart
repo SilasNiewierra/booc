@@ -35,16 +35,8 @@ class _BucketListScreenState extends State<BucketListScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Bucket List,",
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline4
-                        .copyWith(color: defaultTextColor)),
-                Text("here are the books you saved for later.",
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline6
-                        .copyWith(color: defaultTextColor)),
+                Text("Bucket List,", style: getH4()),
+                Text("here are the books you saved for later.", style: getH6()),
               ],
             ),
           ),

@@ -17,19 +17,17 @@ class Body extends StatefulWidget {
 class _BodyState extends State<Body> {
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-
     return SingleChildScrollView(
         child: SizedBox(
-      height: size.height,
+      height: getDeviceHeight(),
       child: Stack(
         children: [
           // Title and Author
           _buildHeading(),
           // Content
-          _buildContent(size),
+          _buildContent(getDeviceHeight()),
           // Cover Image
-          _buildCover(size),
+          _buildCover(getDeviceHeight()),
         ],
       ),
     ));
@@ -43,13 +41,11 @@ class _BodyState extends State<Body> {
         children: [
           Text(
             widget.bookItem.author,
-            style: TextStyle(color: detailTextColor),
+            style: getBody1(),
           ),
           Text(
             widget.bookItem.title,
-            style: Theme.of(context)
-                .textTheme
-                .headline4
+            style: getH4()
                 .copyWith(color: detailTextColor, fontWeight: FontWeight.bold),
           ),
         ],
@@ -57,10 +53,10 @@ class _BodyState extends State<Body> {
     );
   }
 
-  Widget _buildContent(Size size) {
+  Widget _buildContent(double height) {
     return Container(
-      margin: EdgeInsets.only(top: size.height * 0.4),
-      padding: EdgeInsets.symmetric(vertical: 25.0, horizontal: 50.0),
+      margin: EdgeInsets.only(top: ((height / 2.7) + (height * 0.15) - 50)),
+      padding: EdgeInsets.symmetric(horizontal: getDefaultHorizontalPadding()),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.only(
@@ -69,17 +65,17 @@ class _BodyState extends State<Body> {
         ),
       ),
       child: Container(
-        margin: EdgeInsets.only(top: size.height * 0.05),
+        margin: EdgeInsets.only(top: 80),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // Category and Like
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
                   "Category: " + widget.bookItem.category,
-                  style: Theme.of(context).textTheme.headline5,
+                  style: getH5(),
                 ),
                 ValueListenableBuilder(
                   valueListenable: widget.bookItem.like,
@@ -106,10 +102,7 @@ class _BodyState extends State<Body> {
               padding: EdgeInsets.symmetric(vertical: 50.0),
               child: Text(
                 widget.dataBloc.descriptionDummy,
-                style: Theme.of(context)
-                    .textTheme
-                    .subtitle1
-                    .copyWith(fontWeight: FontWeight.w100),
+                style: getDescriptionStyle(),
               ),
             ),
             // Bottom Buttons
@@ -200,13 +193,7 @@ class _BodyState extends State<Body> {
                             read
                                 ? "Unread".toUpperCase()
                                 : 'Read'.toUpperCase(),
-                            style: Theme.of(context)
-                                .textTheme
-                                .headline4
-                                .copyWith(
-                                    color: detailTextColor,
-                                    fontSize: 22.0,
-                                    fontWeight: FontWeight.bold),
+                            style: getH5().copyWith(color: detailTextColor),
                           ),
                         );
                       },
@@ -221,17 +208,17 @@ class _BodyState extends State<Body> {
     );
   }
 
-  Widget _buildCover(Size size) {
+  Widget _buildCover(double height) {
     return Container(
-      margin: EdgeInsets.only(top: size.height * 0.15),
+      margin: EdgeInsets.only(top: height * 0.15),
       padding: EdgeInsets.symmetric(horizontal: 50.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Container(
-            height: 420,
-            width: 300,
+            height: (height / 2.7),
+            width: (height / 2.7) * 0.75,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
             ),
