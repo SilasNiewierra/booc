@@ -13,26 +13,26 @@ Widget buildAppBar(BuildContext context, DataBloc dataBloc, String title,
     title: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        IconButton(
-          icon: heroTag == PageContext.home
-              ? GestureDetector(
-                  onTap: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => MenuScreen(dataBloc: dataBloc)),
-                  ),
-                  child: SvgPicture.asset('assets/icons/menu.svg',
-                      color: defaultTextColor),
-                )
-              : SvgPicture.asset(
+        heroTag != PageContext.home
+            ? IconButton(
+                icon: SvgPicture.asset(
                   'assets/icons/back.svg',
                   color: defaultTextColor,
                 ),
-          onPressed: () {
-            Navigator.pop(context);
-            dataBloc.resetBookItems(heroTag);
-          },
-        ),
+                onPressed: () {
+                  Navigator.pop(context);
+                  dataBloc.resetBookItems(heroTag);
+                },
+              )
+            : GestureDetector(
+                onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => MenuScreen(dataBloc: dataBloc)),
+                ),
+                child: SvgPicture.asset('assets/icons/menu.svg',
+                    color: defaultTextColor),
+              ),
         ValueListenableBuilder(
           valueListenable: searchClicked,
           builder: (BuildContext ctx, bool searchClicked, Widget wdg) {

@@ -12,13 +12,18 @@ class DataBloc {
   List<Book> bucketBooksList = [];
   List<Book> exploreBooksList = [];
 
-  ValueNotifier<List<Book>> readBooks = ValueNotifier<List<Book>>([]);
-  ValueNotifier<List<Book>> bucketBooks = ValueNotifier<List<Book>>([]);
-  ValueNotifier<List<Book>> exploreBooks = ValueNotifier<List<Book>>([]);
+  // ValueNotifier<List<Book>> readBooks = ValueNotifier<List<Book>>([]);
+  // ValueNotifier<List<Book>> bucketBooks = ValueNotifier<List<Book>>([]);
+  // ValueNotifier<List<Book>> exploreBooks = ValueNotifier<List<Book>>([]);
 
   ValueNotifier<List<Book>> readBookItems = ValueNotifier<List<Book>>([]);
   ValueNotifier<List<Book>> bucketBookItems = ValueNotifier<List<Book>>([]);
   ValueNotifier<List<Book>> exploreBookItems = ValueNotifier<List<Book>>([]);
+
+  ValueNotifier<List<charts.Series<ChartSegment, String>>> categoryData =
+      ValueNotifier<List<charts.Series<ChartSegment, String>>>(null);
+
+  Map<String, PaletteColor> colorPaletteMap;
 
   List<Book> bookListDummy = [
     Book(
@@ -80,11 +85,6 @@ class DataBloc {
   String descriptionDummy =
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since. When an unknown printer took a galley.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since. When an unknown printer took a galley.";
 
-  ValueNotifier<List<charts.Series<ChartSegment, String>>> categoryData =
-      ValueNotifier<List<charts.Series<ChartSegment, String>>>(null);
-
-  Map<String, PaletteColor> colorPaletteMap;
-
   DataBloc() {
     exploreBooksList = bookListDummy;
     exploreBookItems.value = exploreBooksList;
@@ -116,12 +116,6 @@ class DataBloc {
 
   void addReadBook(Book book) {
     readBooksList.add(book);
-
-    // Add book to read list
-    // this.readBooks.value.add(book);
-    // ignore: invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member
-    // readBooks.notifyListeners();
-
     readBookItems.value.add(book);
     // ignore: invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member
     readBookItems.notifyListeners();
@@ -129,11 +123,7 @@ class DataBloc {
     // Remove book from bucket list if it has been read
     removeBucketBook(book);
 
-    // this.bucketBooks.value.remove(book);
-    // ignore: invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member
-    // bucketBooks.notifyListeners();
-
-    // Create Analytics
+    // Analytics
     _createAnalyticsData();
     // ignore: invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member
     categoryData.notifyListeners();
@@ -144,10 +134,6 @@ class DataBloc {
     readBookItems.value.remove(book);
     // ignore: invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member
     readBookItems.notifyListeners();
-
-    // this.readBooks.value.remove(book);
-    // ignore: invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member
-    // readBooks.notifyListeners();
 
     // Analytics
     _createAnalyticsData();
@@ -160,10 +146,6 @@ class DataBloc {
     bucketBookItems.value.add(book);
     // ignore: invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member
     bucketBookItems.notifyListeners();
-
-    // this.bucketBooks.value.add(book);
-    // ignore: invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member
-    // bucketBooks.notifyListeners();
   }
 
   void removeBucketBook(Book book) {
@@ -171,9 +153,6 @@ class DataBloc {
     bucketBookItems.value.remove(book);
     // ignore: invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member
     bucketBookItems.notifyListeners();
-    // this.bucketBooks.value.remove(book);
-    // ignore: invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member
-    // bucketBooks.notifyListeners();
   }
 
   void setBookItems(List<Book> booksToDisplay, PageContext pageContext) {
