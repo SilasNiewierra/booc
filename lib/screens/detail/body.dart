@@ -180,6 +180,8 @@ class _BodyState extends State<Body> {
                                       widget.bookItem.title +
                                       "\" from your read list");
                             } else {
+                              widget.bookItem.updateBucketed(false);
+                              widget.dataBloc.removeBucketBook(widget.bookItem);
                               widget.bookItem.updateRead(true);
                               widget.dataBloc.addReadBook(widget.bookItem);
                               createToast(
