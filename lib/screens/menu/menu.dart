@@ -70,23 +70,23 @@ class _MenuScreenState extends State<MenuScreen> {
                             .copyWith(color: defaultTextColor)),
                   ),
                 ),
-                Container(
-                  height: 2.0,
-                  width: 50,
-                  color: defaultTextColor,
-                  margin: EdgeInsets.symmetric(vertical: 10.0),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).pop();
-                    widget.dataBloc.updateSignedInState(false);
-                  },
-                  child: Text("Logout",
-                      style: Theme.of(context)
-                          .textTheme
-                          .headline5
-                          .copyWith(color: defaultTextColor)),
-                )
+                // Container(
+                //   height: 2.0,
+                //   width: 50,
+                //   color: defaultTextColor,
+                //   margin: EdgeInsets.symmetric(vertical: 10.0),
+                // ),
+                // GestureDetector(
+                //   onTap: () {
+                //     Navigator.of(context).pop();
+                //     widget.dataBloc.updateSignedInState(false);
+                //   },
+                //   child: Text("Logout",
+                //       style: Theme.of(context)
+                //           .textTheme
+                //           .headline5
+                //           .copyWith(color: defaultTextColor)),
+                // )
               ],
             ),
           ),
