@@ -45,6 +45,7 @@ Widget buildAppBar(BuildContext context, DataBloc dataBloc, String title,
                 ? Container(
                     width: 300,
                     child: TextField(
+                      autofocus: true,
                       onChanged: (value) {
                         filterSearchResults(value, dataBloc, pageContext);
                       },
@@ -62,10 +63,13 @@ Widget buildAppBar(BuildContext context, DataBloc dataBloc, String title,
                       ),
                     ),
                   )
-                : Container();
+                : Container(
+                    width: 300,
+                    height: 20,
+                  );
           },
         ),
-        pageContext == PageContext.analytics
+        pageContext == PageContext.analytics || pageContext == PageContext.home
             ? IconButton(
                 icon: SvgPicture.asset('assets/icons/search.svg',
                     color: Colors.transparent),
