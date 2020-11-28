@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 
+// Enums
+enum PageContext { bucket, home, explore, analytics }
+
+// Colors
 final accentColor = Colors.blueGrey[900];
 final defaultTextColor = Colors.blueGrey[900];
 final defaultLightTextColor = Colors.blueGrey[600];
 final disabledTextColor = Colors.grey[350];
-
 final detailTextColor = Colors.white;
 
-enum PageContext { bucket, home, explore, analytics }
+// Device Dimension Data
 
 double _deviceHeight = 2340;
 double _deviceWidth = 1080;

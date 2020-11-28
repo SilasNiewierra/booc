@@ -255,6 +255,10 @@ class DataBloc {
         id: 'Segments',
         domainFn: (ChartSegment segment, _) => segment.category,
         measureFn: (ChartSegment segment, _) => segment.amount,
+        colorFn: (_, index) {
+          return charts.MaterialPalette.gray
+              .makeShades(categoryMap.keys.length)[index];
+        },
         data: data,
         labelAccessorFn: (ChartSegment row, _) =>
             '${row.category}: ${row.amount}',
