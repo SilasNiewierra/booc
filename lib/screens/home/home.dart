@@ -36,8 +36,6 @@ class _HomeState extends State<Home> {
   Widget _buildBody() {
     return Container(
       padding: EdgeInsets.all(20.0),
-      // child: BookGridView(
-      //     dataBloc: widget.dataBloc, pageContext: PageContext.home),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

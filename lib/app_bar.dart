@@ -24,14 +24,19 @@ Widget buildAppBar(BuildContext context, DataBloc dataBloc, String title,
                   dataBloc.resetBookItems(pageContext);
                 },
               )
-            : GestureDetector(
-                onTap: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => MenuScreen(dataBloc: dataBloc)),
+            : IconButton(
+                icon: SvgPicture.asset(
+                  'assets/icons/menu.svg',
+                  color: defaultTextColor,
                 ),
-                child: SvgPicture.asset('assets/icons/menu.svg',
-                    color: defaultTextColor),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => MenuScreen(dataBloc: dataBloc)),
+                  );
+                  dataBloc.resetBookItems(pageContext);
+                },
               ),
         ValueListenableBuilder(
           valueListenable: searchClicked,

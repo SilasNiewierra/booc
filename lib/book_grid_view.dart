@@ -261,7 +261,7 @@ void filterSearchResults(
       completeList.addAll(dataBloc.readBooksList);
       break;
     default:
-      completeList.addAll(dataBloc.readBooksList);
+      completeList.addAll([]);
       break;
   }
 
