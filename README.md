@@ -1,16 +1,19 @@
 # booc
+Your reading history in one place.
 
-A new Flutter project.
+![Image of book widgets](./assets/github/detail-screens.png)
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+## Test It
 
-A few resources to get you started if this is your first Flutter project:
+- Download this project.
+- Run ``` flutter build apk ```
+- Go to build/app/outputs/flutter-apk/
+- Copy the app-release.apk to your Android Device
+- On your Android Device, install the .apk
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+### Next Steps
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Implement user Login
+- Implement backend communication with Google Books API
+- Recommendations for a user based on his reading history
