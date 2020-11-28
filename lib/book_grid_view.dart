@@ -145,12 +145,10 @@ class _BookGridViewState extends State<BookGridView> {
             ),
             onPressed: () {
               if (read) {
-                bookItem.updateRead(false);
                 widget.dataBloc.removeReadBook(bookItem);
                 createToast(context,
                     "Removed \"" + bookItem.title + "\" from your read list");
               } else {
-                bookItem.updateRead(true);
                 widget.dataBloc.addReadBook(bookItem);
                 createToast(context,
                     "Added \"" + bookItem.title + "\" to your read list");
@@ -166,7 +164,6 @@ class _BookGridViewState extends State<BookGridView> {
         Icons.remove,
       ),
       onPressed: () {
-        bookItem.updateBucketed(false);
         widget.dataBloc.removeBucketBook(bookItem);
         createToast(context,
             "Removed \"" + bookItem.title + "\" from your Bucket List");

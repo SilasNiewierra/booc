@@ -108,53 +108,70 @@ class _BodyState extends State<Body> {
             // Bottom Buttons
             Row(
               children: [
-                Container(
-                  margin: EdgeInsets.only(right: 30.0),
-                  height: 60,
-                  width: 60,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(18),
-                    border: Border.all(
-                      color: widget.dataBloc.colorPaletteMap.isNotEmpty
-                          ? widget.dataBloc
-                              .colorPaletteMap[widget.bookItem.uniqueId].color
-                          : Theme.of(context).accentColor,
-                    ),
-                  ),
-                  child: ValueListenableBuilder(
-                      valueListenable: widget.bookItem.bucketed,
-                      builder: (BuildContext ctx, bool marked, Widget wdg) {
-                        return FlatButton(
-                          padding: EdgeInsets.zero,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(18)),
-                          onPressed: () {
-                            if (marked) {
-                              widget.bookItem.updateBucketed(false);
-                              widget.dataBloc.removeBucketBook(widget.bookItem);
-                              createToast(
-                                  context, "Removed from your Bucket List");
-                            } else {
-                              widget.bookItem.updateBucketed(true);
-                              widget.dataBloc.addBucketBook(widget.bookItem);
-                              createToast(context, "Added to you Bucket List");
-                            }
-                          },
-                          child: Center(
-                            child: Icon(
-                              marked ? Icons.remove : Icons.add,
-                              color: widget.dataBloc.colorPaletteMap.isNotEmpty
-                                  ? widget
-                                      .dataBloc
-                                      .colorPaletteMap[widget.bookItem.uniqueId]
-                                      .color
-                                  : Theme.of(context).accentColor,
-                              size: 30,
-                            ),
+                ValueListenableBuilder(
+                    valueListenable: widget.bookItem.read,
+                    builder: (BuildContext bctx, bool read, Widget wdgt) {
+                      return Container(
+                        margin: EdgeInsets.only(right: 30.0),
+                        height: 60,
+                        width: 60,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(18),
+                          border: Border.all(
+                            color: read
+                                ? Colors.grey
+                                : widget.dataBloc.colorPaletteMap.isNotEmpty
+                                    ? widget
+                                        .dataBloc
+                                        .colorPaletteMap[
+                                            widget.bookItem.uniqueId]
+                                        .color
+                                    : Theme.of(context).accentColor,
                           ),
-                        );
-                      }),
-                ),
+                        ),
+                        child: ValueListenableBuilder(
+                            valueListenable: widget.bookItem.bucketed,
+                            builder:
+                                (BuildContext ctx, bool marked, Widget wdg) {
+                              return FlatButton(
+                                padding: EdgeInsets.zero,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(18)),
+                                onPressed: read
+                                    ? null
+                                    : () {
+                                        if (marked) {
+                                          widget.dataBloc.removeBucketBook(
+                                              widget.bookItem);
+                                          createToast(context,
+                                              "Removed from your Bucket List");
+                                        } else {
+                                          widget.dataBloc
+                                              .addBucketBook(widget.bookItem);
+                                          createToast(context,
+                                              "Added to you Bucket List");
+                                        }
+                                      },
+                                child: Center(
+                                  child: Icon(
+                                    marked ? Icons.remove : Icons.add,
+                                    color: read
+                                        ? Colors.grey
+                                        : widget.dataBloc.colorPaletteMap
+                                                .isNotEmpty
+                                            ? widget
+                                                .dataBloc
+                                                .colorPaletteMap[
+                                                    widget.bookItem.uniqueId]
+                                                .color
+                                            : Theme.of(context).accentColor,
+                                    size: 30,
+                                  ),
+                                ),
+                              );
+                            }),
+                      );
+                    }),
                 Expanded(
                   child: SizedBox(
                     height: 60,
@@ -172,7 +189,6 @@ class _BodyState extends State<Body> {
                               : Theme.of(context).accentColor,
                           onPressed: () {
                             if (read) {
-                              widget.bookItem.updateRead(false);
                               widget.dataBloc.removeReadBook(widget.bookItem);
                               createToast(
                                   context,
@@ -180,9 +196,7 @@ class _BodyState extends State<Body> {
                                       widget.bookItem.title +
                                       "\" from your read list");
                             } else {
-                              widget.bookItem.updateBucketed(false);
                               widget.dataBloc.removeBucketBook(widget.bookItem);
-                              widget.bookItem.updateRead(true);
                               widget.dataBloc.addReadBook(widget.bookItem);
                               createToast(
                                   context,

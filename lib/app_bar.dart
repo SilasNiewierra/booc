@@ -6,14 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 Widget buildAppBar(BuildContext context, DataBloc dataBloc, String title,
-    PageContext heroTag) {
+    PageContext pageContext) {
   ValueNotifier<bool> searchClicked = ValueNotifier<bool>(false);
   return AppBar(
     automaticallyImplyLeading: false,
     title: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        heroTag != PageContext.home
+        pageContext != PageContext.home
             ? IconButton(
                 icon: SvgPicture.asset(
                   'assets/icons/back.svg',
@@ -21,7 +21,7 @@ Widget buildAppBar(BuildContext context, DataBloc dataBloc, String title,
                 ),
                 onPressed: () {
                   Navigator.pop(context);
-                  dataBloc.resetBookItems(heroTag);
+                  dataBloc.resetBookItems(pageContext);
                 },
               )
             : GestureDetector(
@@ -41,7 +41,7 @@ Widget buildAppBar(BuildContext context, DataBloc dataBloc, String title,
                     width: 300,
                     child: TextField(
                       onChanged: (value) {
-                        filterSearchResults(value, dataBloc, heroTag);
+                        filterSearchResults(value, dataBloc, pageContext);
                       },
                       textAlign: TextAlign.center,
                       style: getH6().copyWith(decoration: TextDecoration.none),
@@ -60,7 +60,7 @@ Widget buildAppBar(BuildContext context, DataBloc dataBloc, String title,
                 : Container();
           },
         ),
-        heroTag == PageContext.analytics
+        pageContext == PageContext.analytics
             ? IconButton(
                 icon: SvgPicture.asset('assets/icons/search.svg',
                     color: Colors.transparent),
@@ -75,7 +75,7 @@ Widget buildAppBar(BuildContext context, DataBloc dataBloc, String title,
                               color: defaultTextColor),
                           onPressed: () {
                             searchClicked.value = false;
-                            dataBloc.resetBookItems(heroTag);
+                            dataBloc.resetBookItems(pageContext);
                           },
                         )
                       : IconButton(

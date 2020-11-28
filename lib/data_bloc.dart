@@ -115,8 +115,10 @@ class DataBloc {
   }
 
   void addReadBook(Book book) {
+    book.read.value = true;
+
     readBooksList.add(book);
-    readBookItems.value.add(book);
+    readBookItems.value = readBooksList;
     // ignore: invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member
     readBookItems.notifyListeners();
 
@@ -130,8 +132,9 @@ class DataBloc {
   }
 
   void removeReadBook(Book book) {
+    book.read.value = false;
     readBooksList.remove(book);
-    readBookItems.value.remove(book);
+    readBookItems.value = readBooksList;
     // ignore: invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member
     readBookItems.notifyListeners();
 
@@ -142,15 +145,19 @@ class DataBloc {
   }
 
   void addBucketBook(Book book) {
+    book.bucketed.value = true;
+
     bucketBooksList.add(book);
-    bucketBookItems.value.add(book);
+    bucketBookItems.value = bucketBooksList;
     // ignore: invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member
     bucketBookItems.notifyListeners();
   }
 
   void removeBucketBook(Book book) {
+    book.bucketed.value = false;
+
     bucketBooksList.remove(book);
-    bucketBookItems.value.remove(book);
+    bucketBookItems.value = bucketBooksList;
     // ignore: invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member
     bucketBookItems.notifyListeners();
   }
@@ -174,9 +181,7 @@ class DataBloc {
         readBookItems.notifyListeners();
         break;
       default:
-        readBookItems.value = booksToDisplay;
-        // ignore: invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member
-        readBookItems.notifyListeners();
+        break;
     }
   }
 
@@ -199,9 +204,7 @@ class DataBloc {
         readBookItems.notifyListeners();
         break;
       default:
-        readBookItems.value = readBooksList;
-        // ignore: invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member
-        readBookItems.notifyListeners();
+        break;
     }
   }
 

@@ -39,7 +39,7 @@ class _MenuScreenState extends State<MenuScreen> {
                             builder: (context) => AnalyticsScreen(
                                 dataBloc: widget.dataBloc, animate: true)));
                   },
-                  child: Text("Analytics", style: getH4()),
+                  child: Text("Analytics", style: getH5()),
                 ),
                 Container(
                   height: 2.0,
@@ -55,7 +55,7 @@ class _MenuScreenState extends State<MenuScreen> {
                             builder: (context) =>
                                 BucketListScreen(dataBloc: widget.dataBloc)));
                   },
-                  child: Text("Bucket List", style: getH4()),
+                  child: Text("Bucket List", style: getH5()),
                 ),
                 // Container(
                 //   height: 2.0,
