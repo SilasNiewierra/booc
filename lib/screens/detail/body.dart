@@ -101,7 +101,7 @@ class _BodyState extends State<Body> {
             Container(
               padding: EdgeInsets.symmetric(vertical: 50.0),
               child: Text(
-                widget.dataBloc.descriptionDummy,
+                widget.bookItem.description,
                 style: getDescriptionStyle(),
               ),
             ),

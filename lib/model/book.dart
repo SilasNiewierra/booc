@@ -6,20 +6,19 @@ class Book {
   String title;
   String author;
   String category;
+  String description;
   ValueNotifier<bool> like = new ValueNotifier<bool>(false);
   ValueNotifier<bool> read = new ValueNotifier<bool>(false);
   ValueNotifier<bool> bucketed = new ValueNotifier<bool>(false);
-  Book({this.uniqueId, this.imgUrl, this.title, this.author, this.category});
+  Book(
+      {this.uniqueId,
+      this.imgUrl,
+      this.title,
+      this.author,
+      this.category,
+      this.description});
 
   updateLiked(bool like) {
     this.like.value = like;
-  }
-
-  updateRead(bool readUpdate) {
-    this.read.value = readUpdate;
-  }
-
-  updateBucketed(bool bucketUpdate) {
-    this.bucketed.value = bucketUpdate;
   }
 }
